@@ -1,0 +1,12 @@
+.button{
+    background-color: #5D3F58;
+    border-radius: 25px;
+    width: 15vw;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,1);
+}
+
+p{
+    color: #ECE1E7;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}

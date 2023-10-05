@@ -1,0 +1,37 @@
+
+
+.backgroundImage{
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: auto;
+    overflow-x: hidden;
+    padding-bottom: 8vw;
+
+}
+
+.companyName{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 150px;
+    font-palette: #ECE1E7;
+    position:absolute; 
+    left:37vw;
+    top:1vw;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.container{
+    background-image: url(../images/BackgroundPic.jpg);
+}
+
+body{
+    background-color:#ECE1E7 ;
+}
+
+.buttonShow{
+    position:absolute; 
+
+    left:43vw;
+    top:33vw;
+}
+
+

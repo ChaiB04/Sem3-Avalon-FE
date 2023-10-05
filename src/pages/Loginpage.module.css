@@ -1,0 +1,46 @@
+.loginForm {
+    background-color: #ECE1E7;
+    border-color: #5D3F58;
+    border-style:solid;
+    margin: auto;
+    width: 400px;
+    padding: 10px;
+    display:flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.loginTitle{
+    color:#5D3F58;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 50px;
+    margin-bottom: 5%;
+}
+
+.textBoxes{
+    display:flex;
+    background-color:#ECE1E7;
+    border-style: solid;
+    border-color: #5D3F58;
+    margin-bottom: 4vh;
+    /* padding-right:20vw; */
+    width: 80%;
+    height:40px;
+    color: #5D3F58;
+}
+
+.loginForm form{
+    width: 400px;
+}
+
+.buttonLogin{
+    background-color: #5D3F58;
+    color:#ECE1E7;
+    border-radius: 25px;
+    border-style: none;
+    width: 50%;
+
+}
+
