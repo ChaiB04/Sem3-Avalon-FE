@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import styles from './RegisterPage.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import userService from "../services/UserService";
 
 function RegisterPage(){
   const [formData, setFormData] = useState({
@@ -30,7 +31,8 @@ function RegisterPage(){
     e.preventDefault();
     try {
       // Send a POST request to your backend API 
-      const response = await axios.post("http://localhost:8080/users", formData);
+      //const response = await axios.post("http://localhost:8080/users", formData);
+      await userService.createUser(formData);
     } catch (error) {
       console.error("Error registering user: ", error);
     }

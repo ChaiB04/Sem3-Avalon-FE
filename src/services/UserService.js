@@ -1,4 +1,3 @@
-import http from "../http-common";
 import axios from "axios";
 
 const hostname = 'http://localhost:8080'
@@ -13,28 +12,16 @@ function createUser(user){
               .then(response => response.data)
 }
 
+function loginWithEmailAndPassword(data){
+  return axios.post(`${hostname}/users/login`, data)
+              .then(response => response.data)
+}
 
-const get = id => {
-    return http.get(`/users/${id}`);
-  };
-  
-const create = data => {
-    return http.post("/users", data);
-  };
-  
-const update = (id, data) => {
-    return http.put(`/users/${id}`, data);
-  };
-  
-const remove = id => {
-    return http.delete(`/users/${id}`);
-  };
 
 const UserService = {
-    get,
-    create,
-    update,
-    remove,
+    createUser,
+    getUserById,
+    loginWithEmailAndPassword
 }
 
 export default UserService;
