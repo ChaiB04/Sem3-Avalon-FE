@@ -11,6 +11,8 @@ function LoginPage(){
     password: ""
   });
 
+  const [errorLoggingIn, setErrorLoggingIn] = useState(false)
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -19,13 +21,23 @@ function LoginPage(){
     });
   };
 
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // Send a POST request to your backend API 
-      //const response = await axios.post("http://localhost:8080/users", formData);
-      await userService.loginWithEmailAndPassword(formData)
-      .then(data => setUserData(data));
+      if (!isEmailValid(formData.email)) {
+        setErrorLoggingIn(true)
+        return; // Prevent the form from submitting
+      }
+      else{
+        await userService.loginWithEmailAndPassword(formData);
+      }
+      
     } catch (error) {
       console.error("Error registering user: ", error);
     }
@@ -36,9 +48,9 @@ return(
   <>
     <form className= {styles.loginForm} onSubmit={handleSubmit} >
     <label className={styles.loginTitle}>Login</label>
-         <input className={styles.textBoxes} type="text" name="email"  placeholder="Email" value={formData.email} onChange={handleInputChange} />
+         <input className={styles.textBoxes} type="text" name="email"  placeholder="Email" value={formData.email} onChange={handleInputChange} required/>
    
-         <input className={styles.textBoxes} type="password" name="password"  placeholder="Password" value={formData.password} onChange={handleInputChange}/>
+         <input className={styles.textBoxes} type="password" name="password"  placeholder="Password" value={formData.password} onChange={handleInputChange} required/>
          <br/>
          <button type="submit" className={` ${styles.buttonLogin}`}>Login</button>
     </form>
