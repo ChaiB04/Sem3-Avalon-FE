@@ -28,19 +28,30 @@ function LoginPage(){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
       // Send a POST request to your backend API 
       if (!isEmailValid(formData.email)) {
         setErrorLoggingIn(true)
         return; // Prevent the form from submitting
       }
       else{
-        await userService.loginWithEmailAndPassword(formData);
+        await userService.loginWithEmailAndPassword(formData)
+        .catch(axiosResponse => {
+          const errors = axiosResponse.response.data
+  
+          if(errors){
+            //it's aready going wrong with int's with the dto so it's sending this
+            if(errors.message.includes("JSON parse error:")){
+              console.log("Could not login user.");
+            }
+          }
+          // if(errors.find(error => error.error === 'Logging in went wrong.')){
+          //   setErrorCreatingAccount(true)
+          // }
+        }
+        )
       }
       
-    } catch (error) {
-      console.error("Error registering user: ", error);
-    }
+  
   };
 
 
@@ -53,7 +64,12 @@ return(
          <input className={styles.textBoxes} type="password" name="password"  placeholder="Password" value={formData.password} onChange={handleInputChange} required/>
          <br/>
          <button type="submit" className={` ${styles.buttonLogin}`}>Login</button>
+         <div>
+         {errorLoggingIn && <h1 className="errorMessage">Please fill in a proper email.</h1>}
+          </div>
     </form>
+
+
   </>
 
 )

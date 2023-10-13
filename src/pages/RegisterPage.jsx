@@ -35,17 +35,19 @@ function RegisterPage(){
       //const response = await axios.post("http://localhost:8080/users", formData);
       await userService.createUser(formData)
       .catch(axiosResponse => {
-        const errors = axiosResponse.response.data.errors
-        if(errors.find(error => error.error === 'Logging in went wrong.')){
-          setErrorCreatingAccount(true)
+        const errors = axiosResponse.response.data
+
+        if(errors){
+          //it's aready going wrong with int's with the dto so it's sending this
+          if(errors.message.includes("JSON parse error:")){
+            console.log("Could not create user.");
+          }
         }
-        
+        // if(errors.find(error => error.error === 'Logging in went wrong.')){
+        //   setErrorCreatingAccount(true)
+        // }
       }
       )
-      .finally(
-        
-      );
-
   };
 
 return(
