@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+
 import styles from './RegisterPage.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import userService from "../services/UserService";
@@ -32,7 +33,6 @@ function RegisterPage(){
     e.preventDefault();
 
           // Send a POST request to your backend API 
-      //const response = await axios.post("http://localhost:8080/users", formData);
       await userService.createUser(formData)
       .catch(axiosResponse => {
         const errors = axiosResponse.response.data

@@ -25,6 +25,7 @@ function NavBar() {
 
     return (
     <nav className={styles.navBar}>
+        <NavLink to="/"  className={styles.headerBrand}>Avalon</NavLink>
         <div className={styles.dropdown}>
         <button className={styles.dropbtn}>Menu</button>
         <div className={styles.dropdownContent}>

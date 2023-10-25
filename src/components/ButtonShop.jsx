@@ -6,11 +6,10 @@ function ButtonShop(){
     return(
         <>
         <button className={styles.button}>
-            <p>Shop now!</p>
+            <p className={styles.text}>Shop now!</p>
         </button>
-
         </>
-        )
+    )
 }
 
 export default ButtonShop;

@@ -1,5 +1,3 @@
-
-
 .backgroundImage{
     background-repeat: no-repeat;
     width: 100vw;
@@ -20,18 +18,46 @@
 }
 
 .container{
-    background-image: url(../images/BackgroundPic.jpg);
+    /* background-image: url(../images/BackgroundPic.jpg); */
+    border-color: #000000;
+   /* // border-radius: 32px; */
+    border-width: 3px;
+}
+
+/*BANNER*/
+
+.indexBanner{
+    width: 100vw;
+    height: 80vh;
+    background-image: url('../images/backgroundhomepage.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+}
+
+.titleCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.title{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #ECE1E7;
+    font-size: 500%;
+    font-weight: 1000; 
 }
 
 body{
     background-color:#ECE1E7 ;
+    width: 100vw;
 }
 
-.buttonShow{
-    position:absolute; 
-
-    left:43vw;
-    top:33vw;
-}
-
-
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0;
+  }
