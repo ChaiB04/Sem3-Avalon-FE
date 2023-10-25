@@ -21,6 +21,18 @@ return (
                     <ShopNowButton/>
                </div>
           </section>
+         
+               <p className={styles.info_titles}>Flowers</p>
+               <div className={styles.line}></div>
+               <p className={styles.info_details}>Buy a variety of beautiful house planted flowers.</p>
+               <div className={styles.info_pictures}>
+               </div>
+
+               <div className={styles.popular_items_container}>
+                    <p className={styles.popular_title}>Popular</p>
+                    <div className={styles.popular_line}></div> 
+                    <div></div>
+               </div>
           </div>
      </>
 )

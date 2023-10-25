@@ -1,28 +1,21 @@
-.backgroundImage{
-    background-repeat: no-repeat;
+
+/* imported fonts */
+@font-face {
+    font-family: 'Catamaran';
+    src: url('cd:C/fonts/Catamaran.ttf');
+    font-weight: 1000;
+    font-style: normal;
+    
+}
+
+
+/* body settings */
+body{
+    background-color:#ECE1E7 ;
     width: 100vw;
-    height: auto;
     overflow-x: hidden;
-    padding-bottom: 8vw;
-
 }
 
-.companyName{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 150px;
-    font-palette: #ECE1E7;
-    position:absolute; 
-    left:37vw;
-    top:1vw;
-    text-shadow: 2px 2px 4px #000000;
-}
-
-.container{
-    /* background-image: url(../images/BackgroundPic.jpg); */
-    border-color: #000000;
-   /* // border-radius: 32px; */
-    border-width: 3px;
-}
 
 /*BANNER*/
 
@@ -33,6 +26,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    overflow-x: hidden;
     
 }
 
@@ -41,23 +35,104 @@
     justify-content: center;
     align-items: center;
     height: 80vh;
+    text-shadow: 2px 2px 4px #1c0a19;
+    overflow-x: hidden;
 }
 
+
+/* Brand Title */
 .title{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+    font-family: 'Catamaran';
     color: #ECE1E7;
-    font-size: 500%;
+    font-size: 700%;
     font-weight: 1000; 
+    overflow-x: hidden;
+
 }
 
-body{
-    background-color:#ECE1E7 ;
-    width: 100vw;
-}
 
+/* button placement */
 .buttonContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 0;
+    overflow-x: hidden;
   }
+
+/* styling first div about information */
+.info_titles{
+    font-family: 'Catamaran';
+    font-weight: 1000;
+    color: #5D3F58;
+    margin-top: 50px;
+    left: 15px;
+    display:flex;
+    justify-content: flex-start;
+    margin-left:15%;
+    font-size: 50px;
+    overflow-x: hidden;
+}
+
+.line{
+    background-color: #5D3F58;
+    height:5px;
+    width: 40%;
+    margin-left:10%;
+    overflow-x: hidden;
+}
+
+.info_details{
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif, 'Arial Narrow', Arial, sans-serif;
+    color: #5D3F58;
+    margin-top: 30px;
+    display:flex;
+    justify-content: flex-start;
+    margin-left:10%;
+    font-size: 30px;
+    overflow-x: hidden;
+}
+
+.info_pictures{
+    background-image: url('../images/FlowerFieldHomePages.jpeg');
+    height:192px;
+    width: 80%;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+    margin-left: 10%;
+    overflow-x: hidden;
+    margin-bottom: 60px;
+}
+
+
+/* styling second div about popular products */
+.popular_items_container{
+    background-color: #5D3F58;
+    overflow-x: hidden;
+}
+
+.popular_title{
+    color:#ECE1E7;
+    font-family: 'Catamaran';
+    font-weight: 1000;
+    margin-top: 50px;
+    left: 15px;
+    display:flex;
+    justify-content: flex-end;
+    padding-top: 5%;
+    margin-right:15%;
+    font-size: 50px;
+    overflow-x: hidden;
+}
+
+.popular_line{
+    background-color: #ECE1E7;
+    height:5px;
+    width: 40%;
+    margin-right:10%;
+    margin-bottom: 30px;
+    overflow-x: hidden;
+}
