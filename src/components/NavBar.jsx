@@ -10,11 +10,11 @@ function NavBar() {
 
     
     const userToken = useSelector((state) => state.token);
+    const dispatch = useDispatch();
 
     const handleLogOut = (e) => {
-        const dispatch = useDispatch();
         dispatch(logout());
-        localStorage.removeItem('persist:root'); 
+        localStorage.clear();
     }
 
     const AuthenticatedLinks = [
