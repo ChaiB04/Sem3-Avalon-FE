@@ -29,7 +29,7 @@ function createUser(user) {
 
 function loginWithEmailAndPassword(data) {
   return new Promise((resolve, reject) => {
-    axios.post(`${hostname}/users/login`, data)
+    axios.post(`${hostname}/login`, data)
       .then(response => {
         resolve(response.data);
       })

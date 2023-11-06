@@ -1,9 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from './RegisterPage.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import userService from "../services/UserService";
+import { useNavigate } from "react-router";
 
 function RegisterPage(){
   const [formData, setFormData] = useState({
@@ -19,7 +21,7 @@ function RegisterPage(){
     country: "",
   });
 
-  const [errorCreatingAccount, setErrorCreatingAccount] = useState(false)
+  const navigate = useNavigate()
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,23 +33,26 @@ function RegisterPage(){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-          // Send a POST request to your backend API 
-      await userService.createUser(formData)
-      .catch(axiosResponse => {
-        const errors = axiosResponse.response.data
-
-        if(errors){
-          //it's aready going wrong with int's with the dto so it's sending this
-          if(errors.message.includes("JSON parse error:")){
-            console.log("Could not create user.");
-          }
+    // Send a POST request to your backend API
+      await userService.createUser(formData).then(navigate("/"))
+      .catch(error => {
+        if (error.response && error.response.status === 400) {
+          toast.error("Please fill in the field correctly.", {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 5000,
+            draggable: false,
+            className: styles.toastNotification
+          });
         }
-        // if(errors.find(error => error.error === 'Logging in went wrong.')){
-        //   setErrorCreatingAccount(true)
-        // }
-      }
-      )
+        else if (error.response && error.response.data) {
+          // Check if error message is related to JSON parsing error
+          if (error.response.data.message.includes("JSON parse error:")) {
+            toast.error("Could not create user.");
+          }
+        } else {
+          toast.error("An unknown error occurred.");
+        }
+      })
   };
 
 return(
@@ -80,10 +85,9 @@ return(
         </div>
 
         <br/>
-        <p className={'error-message' + (errorCreatingAccount ? ' show' : '')}>Error making account</p>
-          
         <button type="submit" className={` ${styles.buttonLogin}`} >Register</button>
     </form>
+    <ToastContainer toastStyle={{ backgroundColor: "#333333" }}/>
   </>
 
 )

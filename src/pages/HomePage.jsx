@@ -1,7 +1,6 @@
 import React from "react";
 import styles from './HomePage.module.css';
-import NavBar from '../components/NavBar';
-import ShopNowButton from '../components/ButtonShop';
+import ShopNowButton from '../components/ButtonShop.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function HomePage(){

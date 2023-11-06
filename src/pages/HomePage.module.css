@@ -1,12 +1,12 @@
 
 /* imported fonts */
-@font-face {
+/* @font-face {
     font-family: 'Catamaran';
     src: url('cd:C/fonts/Catamaran.ttf');
     font-weight: 1000;
     font-style: normal;
     
-}
+} */
 
 
 /* body settings */
@@ -36,19 +36,18 @@ body{
     align-items: center;
     height: 80vh;
     text-shadow: 2px 2px 4px #1c0a19;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 
 /* Brand Title */
 .title{
-    /* font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
-    font-family: 'Catamaran';
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* font-family: 'Catamaran'; */
     color: #ECE1E7;
     font-size: 700%;
     font-weight: 1000; 
     overflow-x: hidden;
-
 }
 
 
@@ -58,12 +57,14 @@ body{
     justify-content: center;
     align-items: center;
     height: 0;
-    overflow-x: hidden;
+    position:absolute;
+    width: 100%;
   }
 
 /* styling first div about information */
 .info_titles{
-    font-family: 'Catamaran';
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* font-family: 'Catamaran'; */
     font-weight: 1000;
     color: #5D3F58;
     margin-top: 50px;
@@ -72,7 +73,7 @@ body{
     justify-content: flex-start;
     margin-left:15%;
     font-size: 50px;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .line{
@@ -80,7 +81,7 @@ body{
     height:5px;
     width: 40%;
     margin-left:10%;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .info_details{
@@ -91,7 +92,7 @@ body{
     justify-content: flex-start;
     margin-left:10%;
     font-size: 30px;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .info_pictures{
@@ -103,7 +104,7 @@ body{
     background-position: center;
     background-size: cover; 
     margin-left: 10%;
-    overflow-x: hidden;
+    overflow: hidden;
     margin-bottom: 60px;
 }
 
@@ -116,7 +117,8 @@ body{
 
 .popular_title{
     color:#ECE1E7;
-    font-family: 'Catamaran';
+    /* font-family: 'Catamaran'; */
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: 1000;
     margin-top: 50px;
     left: 15px;
@@ -125,7 +127,7 @@ body{
     padding-top: 5%;
     margin-right:15%;
     font-size: 50px;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .popular_line{
@@ -136,3 +138,8 @@ body{
     margin-bottom: 30px;
     overflow-x: hidden;
 }
+
+.toastNotification {
+    /* background-color: #ECE1E7; */
+    color: #ECE1E7;
+  }
