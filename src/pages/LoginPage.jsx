@@ -68,24 +68,6 @@ function LoginPage(){
     }
   };
 
-  // function YourComponent() {
-  //   // Access the token from Redux store
-  //   const userToken = useSelector((state) => state.user.token);
-  
-  //   if (userToken) {
-  //     // Token is present in Redux store
-  //     console.log('Access Token in Redux:', userToken);
-  //   } else {
-  //     // Token is not present or is falsy
-  //     console.log('No Access Token in Redux store.');
-  //   }
-  
-  //   // Your component code here
-  // }
-
-
-
-
 return(
   <>
     <form className= {styles.loginForm} onSubmit={handleSubmit} >

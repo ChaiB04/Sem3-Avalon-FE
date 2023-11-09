@@ -133,7 +133,8 @@ body{
 .popular_line{
     background-color: #ECE1E7;
     height:5px;
-    width: 40%;
+    margin-left: 50%;
+    right:0 !important;
     margin-right:10%;
     margin-bottom: 30px;
     overflow-x: hidden;
@@ -143,3 +144,97 @@ body{
     /* background-color: #ECE1E7; */
     color: #ECE1E7;
   }
+
+  .cardsHolder{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    overflow-x: scroll;
+    white-space: nowrap;
+    max-width: 95vw;
+    padding:5px;
+    scrollbar-width: 0px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  
+/* 
+  .cardsHolder::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar in WebKit browsers 
+  } */
+  
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 250px;
+    margin: 5px;
+    text-align: center;
+    font-family: arial;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .cardcontainer {
+    padding: 2px 16px;
+    padding-top: 16px;
+    background-color: #ECE1E7;
+  }
+  
+  .cardpicture {
+    width: 250px;
+    height: 250px;
+    background-color: #1c0a19;
+    display: flex;
+    justify-content: center;
+    object-fit: scale-down;
+    overflow:hidden;
+    /* background-image: url('../images/logo.jpg'); */
+  }
+  
+  .cardTitle {
+    color: #1c0a19;
+    word-break: break-all;
+  }
+
+  /* @media only screen and (max-width: 600px) {
+    .cardpicture{
+      height:150px;
+  }
+  } */
+
+  /* styling div with social media */
+  .socialmediaholder{
+    background-color: #ECE1E7;
+  }
+
+  .socialmedias{
+    display: flex;
+    justify-content: center;
+  }
+
+  .socialmedialogo{
+    height:100px;
+    margin:50px;
+  }
+
+  .socialmediatext{
+    font-size: 200%;
+    padding-top: 50px;
+    background-color: #ECE1E7;
+  }
+
+  /* Media query for responsive design */
+@media screen and (max-width: 768px) {
+  .socialmedialogo {
+    height: 60px; 
+    margin: 5px; 
+  }
+
+  .socialmediatext {
+    font-size: 150%; 
+    padding-top: 10px; 
+  }
+}

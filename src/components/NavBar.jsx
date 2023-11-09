@@ -14,7 +14,7 @@ function NavBar() {
 
     const handleLogOut = (e) => {
         dispatch(logout());
-        localStorage.clear();
+        //localStorage.clear();
     }
 
     const AuthenticatedLinks = [
