@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import styles from './ProductPage.module.css';
-import productService from '../services/ProductService.js'
+import productService from '../../services/ProductService.js'
+import ProductCard from "/Users/cbaha/individual-project-fe-sem3/src/components/ProductCard.jsx"
 
 function ProductPage(){
     const [productList, setProductList] = useState([]);
@@ -41,20 +42,25 @@ function ProductPage(){
 
                     <div className={styles.productbox}>
                     <div className = {styles.cardsHolder} >
-                         {Object.keys(productList).length > 0 ? (
-                              Object.keys(productList).map(key => (
-                                   <div className={styles.card} key={key}>
-                                        <div className={styles.cardpicture}><img src={productList[key].picture} alt="ProductPicture"></img></div>
-                                   <div className={styles.cardcontainer}>
-                                        {/* //<img src={productList[key].picture} alt="ProductPicture" className="cardpicture" /> */}
-                                        <h4 className={styles.cardTitle}>{productList[key].name}</h4>
-                                        <p>{productList[key].price}</p>
-                                   </div>
-                                   </div>
-                              ))
-                              ) : (
-                              <p>No products available.</p>
-                              )}
+                    <div className={styles.cardsHolder}>
+                    {productList.length > 0 ? (
+                         productList.map((product) => (
+                              <ProductCard key={product.id} product={product} />
+                         ))
+                         ) : (
+                         <p>No products available.</p>
+                         )}
+                         </div>
+                              {/* {
+                                   productList.length > 0 ? (
+                                        productList.map(key => {
+                                             <ProductCard productKey = {key}/>
+                                        })
+                                   ) :
+                                   (
+                                        <p>No products available.</p>
+                                        )
+                              } */}
                          </div>
                     </div>
 

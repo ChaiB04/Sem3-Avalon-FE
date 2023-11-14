@@ -45,6 +45,11 @@ function NavBar() {
             id: 3,
             path: "/register",
             text: "Register Page"
+        },
+        {
+            id: 4,
+            path: "/productpage",
+            text: "Product Page"
         }
     ];
 

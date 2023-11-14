@@ -2,8 +2,8 @@ import React from "react";
 import styles from './LoginPage.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
-import { setUserToken } from "../redux/features/userSlice"; 
-import userService from "../services/UserService";
+import { setUserToken } from "../../redux/features/userSlice"; 
+import userService from "../../services/UserService";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

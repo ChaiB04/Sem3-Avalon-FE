@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from './RegisterPage.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import userService from "../services/UserService";
+import userService from "../../services/UserService";
 import { useNavigate } from "react-router";
 
 function RegisterPage(){
@@ -19,9 +19,12 @@ function RegisterPage(){
     housenumber: "",
     zipcode: "",
     country: "",
+    picture: [],
   });
 
-  const navigate = useNavigate()
+  const [picture, setPicture] = useState();
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,28 +34,59 @@ function RegisterPage(){
     });
   };
 
+  const openFileExplorer = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".jpg,.jpeg";
+    input.onchange = handleFileSelect;
+    input.click();
+  };
+
+  const handleFileSelect = async (event) => {
+    event.preventDefault();
+  
+    const file = event.target.files[0];
+    if (file) {
+      if (file.type === "image/jpeg" || file.type === "image/jpg") {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const arrayBuffer = e.target.result;
+          const byteArray = new Uint8Array(arrayBuffer);
+          const base64String = btoa(String.fromCharCode.apply(null, byteArray));
+  
+          setFormData({ ...formData, picture: base64String });
+          setPicture(URL.createObjectURL(file));
+        };
+        reader.readAsArrayBuffer(file);
+      } else {
+        alert("Please select a file of type JPG or JPEG.");
+      }
+    }
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Send a POST request to your backend API
-      await userService.createUser(formData).then(navigate("/"))
-      .catch(error => {
+    await userService
+      .createUser(formData)
+      .then(() => navigate("/login"))
+      .catch((error) => {
         if (error.response && error.response.status === 400) {
           toast.error("Please fill in the field correctly.", {
             position: toast.POSITION.BOTTOM_CENTER,
             autoClose: 5000,
             draggable: false,
-            className: styles.toastNotification
+            className: styles.toastNotification,
           });
-        }
-        else if (error.response && error.response.data) {
-          // Check if error message is related to JSON parsing error
+        } else if (error.response && error.response.data) {
           if (error.response.data.message.includes("JSON parse error:")) {
             toast.error("Could not create user.");
           }
         } else {
           toast.error("An unknown error occurred.");
         }
-      })
+      });
   };
 
 return(
@@ -81,7 +115,25 @@ return(
             <input className={styles.textBoxes} type="text" name="zipcode"  placeholder="Zipcode"  value={formData.zipcode} onChange={handleInputChange} required/>
 
             <input className={styles.textBoxes} type="text" name="country"  placeholder="Country" value={formData.country} onChange={handleInputChange} required/>
-          </div>   
+          </div>  
+          <div className={styles.textBoxesColumn}>
+              <div className={styles.pictureContainerStyle}>
+                {formData.picture !== null ? (
+                  <img
+                    id='picture'
+                    className="profile_picture"
+                    src={picture}
+                    alt="picture"
+                    key={formData.picture}
+                  />
+                ) : (
+                  <p>No picture selected.</p>
+                )}
+              </div>
+              <button type="button" onClick={openFileExplorer}>
+                Change Avatar
+              </button>
+            </div> 
         </div>
 
         <br/>

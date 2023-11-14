@@ -16,8 +16,21 @@ function getAllProducts(){
     })
 }
 
+function getProduct(id){
+    return new Promise((resolve, reject) => {
+        axios.get(`${hostname}/products/${id}`)
+        .then(response =>{
+            resolve(response);
+        })
+        .catch(error => {
+            reject(error);
+        })
+    })
+}
+
 const ProductService = {
-    getAllProducts
+    getAllProducts,
+    getProduct
 }
 
 export default ProductService;

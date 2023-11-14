@@ -1,5 +1,4 @@
 .container {
-    width: 100vw;
     height: 80vh;
     margin-top: 100px;
 
@@ -55,41 +54,6 @@
     max-width: 95vw;
     padding:5px;
 
-  }
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 200px;
-    margin: 5px;
-    text-align: center;
-    font-family: arial;
-    border-radius: 25px;
-    overflow: hidden;
-  }
-  
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  }
-  
-  .cardcontainer {
-    padding: 2px 16px;
-    padding-top: 16px;
-    background-color: #ECE1E7;
-   
-  }
-  
-  .cardpicture {
-    width: 200px;
-    height: 200px;
-    background-color: #1c0a19;
-    display: flex;
-    justify-content: center;
-    object-fit: scale-down;
-    overflow:hidden;
-    /* background-image: url('../images/logo.jpg'); */
-  }
-  
-  .cardTitle {
-    color: #1c0a19;
   }
   
   

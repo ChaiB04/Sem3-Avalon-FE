@@ -76,7 +76,7 @@ return (
 
                          <div className={styles.socialmediaholder}>
                               <h4 className={styles.socialmediatext}>Follow us on Social Media!</h4>
-                              <div classname={styles.socialmedias}>
+                              <div className={styles.socialmedias}>
                                    <img src={twitterLogo} className={styles.socialmedialogo}/>
                                    <img src={instagramLogo} className={styles.socialmedialogo}/>
                                    <img src={snapchatLogo} className={styles.socialmedialogo}/>

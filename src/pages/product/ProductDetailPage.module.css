@@ -1,0 +1,153 @@
+body {
+    background-color: #ECE1E7;
+  }
+
+  .container{
+    height: 100vh;
+    /* margin-top: 5%; */
+    width:100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .wrapper {
+    height: 60%;
+    width: 70%;
+    margin: 50px auto;
+    border-radius: 7px 7px 7px 7px;
+    border-color: #5D3F58;
+    border:15px;
+    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.3);
+  }
+  
+  .productImage {
+    float: left;
+    height: 420px;
+    width: 327px;
+  }
+  
+  .productImage img {
+    border-radius: 7px 0 0 7px;
+  }
+  
+  .productInfo {
+    float: left;
+    height: 420px;
+    width: 327px;
+    border-radius: 0 7px 10px 7px;
+    background-color: #ffffff;
+  }
+  
+  .productText {
+    height: 300px;
+    width: 327px;
+  }
+  
+  .productText h1 {
+    margin: 0;
+    padding-top: 52px;
+    font-size: 34px;
+    color: #20051c;
+  }
+  
+  .productText h1,
+  .productpricebtn p {
+    font-family: 'Bentham', serif;
+  }
+  
+  .productText h2 {
+    margin: 0 0 47px 38px;
+    font-size: 13px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #d2d2d2;
+    letter-spacing: 0.2em;
+  }
+  
+  .productText p {
+    height: 125px;
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    color: #5D3F58;
+    line-height: 1.7em;
+    font-size: 15px;
+    font-weight: lighter;
+    overflow: hidden;
+  }
+  
+  .productpricebtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 17px;
+    position: relative;
+  }
+  
+  .productpricebtn p {
+    display: flex;
+    position: absolute;
+    top: -20px;
+    height: 50px;
+    font-family: 'Trocchi', serif;
+    padding-bottom: 20%;
+    align-items: center;
+    font-size: 28px;
+    font-weight: lighter;
+    color: #5D3F58;
+  }
+  
+  span {
+    display: inline-block;
+    height: 50px;
+    font-family: 'Suranna', serif;
+    font-size: 34px;
+  }
+  
+  .productpricebtn button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 176px;
+    margin: 0;
+    box-sizing: border-box;
+    border: transparent;
+    border-radius: 60px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #ECE1E7;
+    background-color: #5D3F58;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .productpricebtn button:hover {
+    background-color: #20051c;
+  }
+
+  @media (max-width: 767px) {
+    .wrapper {
+      width: 70%;
+      margin: 50px 0; /* You can adjust the margin as needed */
+    }
+  
+    .productImage,
+    .productInfo {
+      float: none;
+      width: 100%;
+      border-radius: 7px 7px 0 0;/* Adjust if needed */ /* Adjust if needed */
+    }
+  
+    .productImage img {
+      border-radius: 7px; /* Adjust if needed */
+    }
+  
+    .productText,
+    .productpricebtn {
+      width: 100%;
+    }
+  }
