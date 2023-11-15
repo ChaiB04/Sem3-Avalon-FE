@@ -10,6 +10,7 @@ import RegisterPage from './pages/user/RegisterPage.jsx';
 import ProductPage from './pages/product/ProductPage.jsx'
 import ProductDetailPage from './pages/product/ProductDetailPage.jsx'
 import ProfilePage from './pages/user/ProfilePage.jsx'
+import NewProductPage from './pages/product/NewProductPage.jsx'
 
 function App() {
   return (    
@@ -24,6 +25,7 @@ function App() {
           <Route path="/productpage" element={<ProductPage/>} />
           <Route path="/product/:id" element={<ProductDetailPage/>}/>
           <Route path="/profilepage" element={<ProfilePage/>}/>
+          <Route path="/newproductpage" element={<NewProductPage/>}/>
         </Routes>
       </Router>
     </>

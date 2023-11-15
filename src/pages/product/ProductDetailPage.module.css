@@ -13,22 +13,29 @@ body {
   
   .wrapper {
     height: 60%;
-    width: 70%;
+    width: 90%;
     margin: 50px auto;
-    border-radius: 7px 7px 7px 7px;
-    border-color: #5D3F58;
-    border:15px;
+    border-radius: 7px;
+    border: 15px solid #5D3F58; /* Style, Width, Color */
     box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.3);
-  }
+}
+
   
   .productImage {
     float: left;
     height: 420px;
     width: 327px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .productImage img {
     border-radius: 7px 0 0 7px;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
   }
   
   .productInfo {
@@ -36,7 +43,7 @@ body {
     height: 420px;
     width: 327px;
     border-radius: 0 7px 10px 7px;
-    background-color: #ffffff;
+    background-color: #faf2f7;
   }
   
   .productText {

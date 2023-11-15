@@ -1,7 +1,7 @@
 .container {
     height: 80vh;
     margin-top: 100px;
-
+    width: 100vw;
   }
   
   .textBoxes {
@@ -48,7 +48,7 @@
 
   .cardsHolder{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 95vw;

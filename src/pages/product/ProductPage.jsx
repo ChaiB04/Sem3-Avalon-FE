@@ -6,14 +6,36 @@ import ProductCard from "/Users/cbaha/individual-project-fe-sem3/src/components/
 
 function ProductPage(){
     const [productList, setProductList] = useState([]);
+    
+    const [initialFilterState, setinitialFilterState] = useState({
+          name: "",
+          price: 0,
+          color: ""
+     })
+
 
     useEffect(() => {
          fetchProducts(); 
          //console.log("Products: " + productList)
-       },[]);
+       },[initialFilterState]);
+
+     
+     const handleInputChange = (e) => {
+          const { name, value } = e.target;
+          setinitialFilterState({
+          ...initialFilterState,
+          [name]: value,
+          });
+     };
 
          async function fetchProducts() {
-              await productService.getAllProducts().then((response) =>{
+               console.log(initialFilterState.name)
+               const data = {
+                    name: initialFilterState.name === "" ? null : initialFilterState.name,
+                    price: initialFilterState.price,
+                    color: initialFilterState.color === "" ? null : initialFilterState.color,
+               }
+              await productService.getAllProducts({params: data}).then((response) =>{
                    setProductList(response);
               }).catch(error => {
                         if (error.response) {
@@ -31,9 +53,10 @@ function ProductPage(){
         <div className={styles.container}>
            
                 <div>
-                    <input className={styles.textBoxes} type="text" name="searchinpit"  placeholder="Search" />
-                    <button type="submit" className={` ${styles.button}`}>Search</button>
-          
+                    <form onSubmit={fetchProducts}>
+                         <input className={styles.textBoxes} type="text" name="name" value={initialFilterState.name} onChange={handleInputChange} placeholder="Search" />
+                         <button type="submit" className={` ${styles.button}`} >Get All Products</button>
+                    </form>
                 </div>
                 <div className={styles.filterandproductcontainer}>
                     <div className= {styles.filterbox}>

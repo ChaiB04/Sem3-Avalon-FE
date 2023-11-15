@@ -27,6 +27,11 @@ function NavBar() {
             id: 2,
             path: "/",
             text: "Homepage"
+        },
+        {
+            id: 4,
+            path: "/productpage",
+            text: "Product Page"
         }
     ];
 

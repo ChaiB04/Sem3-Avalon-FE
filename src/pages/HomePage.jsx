@@ -12,10 +12,16 @@ import instagramLogo from '../images/instagramLogo.png'
 import snapchatLogo from '../images/snapchatLogo.png'
 
 import flower from '../images/logo.jpg'
+import ProductCard from "../components/ProductCard.jsx";
 
 
 function HomePage(){
      const [productList, setProductList] = useState([]);
+     const initialFilterState = {
+          name: null,
+          price: 0,
+          color: null
+     }
 
      useEffect(() => {
           fetchProducts(); 
@@ -23,7 +29,7 @@ function HomePage(){
         },[]);
 
           async function fetchProducts() {
-               await productService.getAllProducts().then((response) =>{
+               await productService.getAllProducts({params: initialFilterState}).then((response) =>{
                     setProductList(response);
                }).catch(error => {
                          if (error.response) {
@@ -57,21 +63,16 @@ return (
                     <p className={styles.popular_title}>Popular</p>
                     <div className={styles.popular_line}></div> 
                          <div className = {styles.cardsHolder} >
-                         {Object.keys(productList).length > 0 ? (
-                              Object.keys(productList).map(key => (
-                                   <div className={styles.card} key={key}>
-                                        <div className={styles.cardpicture}><img src={productList[key].picture} alt="ProductPicture"></img></div>
-                                   <div className={styles.cardcontainer}>
-                                        {/* //<img src={productList[key].picture} alt="ProductPicture" className="cardpicture" /> */}
-                                        <h4 className={styles.cardTitle}>{productList[key].name}</h4>
-                                        <p>{productList[key].price}</p>
-                                   </div>
-                                   </div>
-                              ))
-                              ) : (
-                              <p>No products available.</p>
-                              )}
+                         {productList.length > 0 ? (
+                         productList.map((product) => (
+                              <ProductCard key={product.id} product={product} />
+                         ))
+                         ) : (
+                         <p>No products available.</p>
+                         )}
                          </div>
+
+
 
 
                          <div className={styles.socialmediaholder}>
