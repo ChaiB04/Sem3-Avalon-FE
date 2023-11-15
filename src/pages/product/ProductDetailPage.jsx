@@ -38,7 +38,7 @@ function ProductDetailPage() {
     }
 
     async function deleteProduct(){
-        await productService.deleteProduct(id)
+        await productService.deleteProduct(product.id)
         .then(navigate("/productpage"))
         .catch(error => {
             if (error.response) {
@@ -48,7 +48,7 @@ function ProductDetailPage() {
                  }
             }
   })
-    }
+}
 
     return (
         <div className={styles.container}>

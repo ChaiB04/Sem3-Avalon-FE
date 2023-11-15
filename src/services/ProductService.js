@@ -40,14 +40,16 @@ function createProduct(data){
     })
 }
 
-function deleteProduct(id){
+function deleteProduct(id) {
     return new Promise((resolve, reject) => {
         axios.delete(`${hostname}/products/${id}`)
-        .catch(error =>{
-            reject(error);
-        })
-    })
+            .catch(error => {
+                reject(error);
+            });
+    });
 }
+
+
 
 const ProductService = {
     getAllProducts,
