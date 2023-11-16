@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from "react-redux";
-import { logout, setUserToken } from "../redux/features/userSlice"; 
+import { logout } from "../redux/features/userSlice"; 
 
 function NavBar() {
 
@@ -20,7 +20,7 @@ function NavBar() {
     const AuthenticatedLinks = [
         {
             id: 1,
-            path: "/profile",
+            path: "/profilepage",
             text: "Profile Page"
         },
         {

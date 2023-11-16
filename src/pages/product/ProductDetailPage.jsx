@@ -71,9 +71,10 @@ function ProductDetailPage() {
                                 <p>{product.price}$</p>
                                 <br />
                                 <button type="button">buy now</button>
+                                <button onClick={deleteProduct}>Delete</button>
                             </div>
                         </div>
-                        <button onClick={deleteProduct}>Delete</button>
+                        
                     </>
                 ) : (
                     <p>Loading...</p>
