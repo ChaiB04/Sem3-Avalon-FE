@@ -28,6 +28,8 @@
     background-color: #5D3F58; 
     margin-right:5%;
     margin-left:5%;
+    display: flex;
+    justify-content: center;
 }
   
   .filterandproductcontainer {
@@ -54,6 +56,98 @@
     max-width: 95vw;
     padding:5px;
 
+  }
+
+  /* price selector */
+  .containerSlider {
+    width: 100vw;
+  }
+  
+  .range {
+    display: flex;
+    width: 600px;
+  }
+  
+  .range__slider {
+    width:80%;
+  }
+  
+  .range__value {
+    width: 35%;
+    margin-left: 45px;    
+    text-align: center;
+    border-left: #e6e4e4 1px solid;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+  }
+  
+  .form-group label {
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: #8a1cbd;
+    margin-bottom: 5px;
+    font-wight:900;
+  }
+  
+  .form-group span {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #0b3a55;
+  }
+  
+  .range__slider label {
+    margin-bottom: 10px;
+  }
+  
+  .range__slider [type="range"] {
+    width: 100%;
+    appearance: none;
+    height: 13px;
+    border-radius: 6px;
+    background: #ECE1E7;
+    outline: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* custom thumb */
+  .range__slider [type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #5D3F58;
+    border: #ECE1E7 5px solid;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+  }
+  
+  .range__slider [type="range"]::-webkit-slider-thumb:hover {
+    background: #370d30;
+  }
+  
+  .range__slider [type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 50%;
+    background: #2ba1f0;
+    border: #78c9ff 5px solid; cursor: pointer;
+    transition: background .15s ease-in-out;
+  }
+  
+  .range__slider [type="range"]::-moz-range-thumb:hover {
+    background: #4f6171;
+  }
+  
+  /* remove border */
+  input::-moz-focus-inner, input::-moz-focus-outer {
+    border: 0;
   }
   
   
