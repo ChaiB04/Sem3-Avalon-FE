@@ -39,10 +39,20 @@ function loginWithEmailAndPassword(data) {
   });
 }
 
+function editAccount(id, data) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${hostname}/users/${id}`, data)
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+
 const UserService = {
   createUser,
   getUserById,
-  loginWithEmailAndPassword
+  loginWithEmailAndPassword,
+  editAccount
 };
 
 export default UserService;

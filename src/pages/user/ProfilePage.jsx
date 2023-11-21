@@ -4,16 +4,35 @@ import styles from "../user/ProfilePage.module.css"
 import userService from "../../services/UserService";
 import { ToastContainer, toast } from "react-toastify";
 import ProfileInfo from "../../components/ProfileInfo";
+import EditProfileInfo from "../../components/EditProfileInfo";
 
 function ProfilePage() {
 
     const [user, setUser] = useState({});
     const [picture, setPicture] = useState(null);
+    const [editing, setEditing] = useState(false);
+    const [buttonEditText, setButtonEditText] = useState();
+
+    const editPorfile = "Edit Profile";
+    const goBack = "Go back";
 
     useEffect(() => {
         getUser()
-
+         setButtonEditText(editPorfile);
     }, [])
+  
+    function enableEditing(){
+      if(editing){
+        setButtonEditText(editPorfile);
+        
+        setEditing(false);
+        
+      }
+      else{
+        setButtonEditText(goBack)
+        setEditing(true);
+      }
+    }
 
     async function getUser(){
       //hardcoded right now
@@ -52,10 +71,15 @@ function ProfilePage() {
               )
               }
             </div>
-            <button>Edit</button>
+            <button onClick={enableEditing} className={styles.button}>{buttonEditText}</button>
 
           <div  className={styles.profileInfo}>
-          <ProfileInfo props = {user}/>
+          {editing ? (
+            <EditProfileInfo props = {user}/> 
+          ) : (
+            
+            <ProfileInfo props = {user}/> 
+          )}          
           </div>
        
   
