@@ -3,14 +3,20 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router";
 import styles from "../product/ProductDetailPage.module.css";
 import productService from '../../services/ProductService.js';
-
 function ProductDetailPage() {
     const { id } = useParams();
 
     const [product, setProduct] = useState();
     const [picture, setPicture] = useState();
     
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    function addToCart(){
+            const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+            const updatedCart = [...existingCart, product];
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+            // Update state or trigger a re-render
+    }
 
     useEffect(() => {
         getProduct();
@@ -41,12 +47,16 @@ function ProductDetailPage() {
         await productService.deleteProduct(product.id)
         .then(navigate("/productpage"))
         .catch(error => {
-            if (error.response) {
-                 const errors = error.response.data.errors;
-                 if (errors) {
-                 toast.error("Could not find products.");
-                 }
-            }
+            if (error.response && error.response.status === 400) {
+                toast.error(error.response.data.message, {
+                  position: toast.POSITION.BOTTOM_CENTER,
+                  autoClose: 5000,
+                  draggable: false,
+                  className: styles.toastNotification,
+                });
+              } else {
+                toast.error("An unknown error occurred.");
+              }
   })
 }
 
@@ -70,7 +80,7 @@ function ProductDetailPage() {
                             <div className={styles.productpricebtn}>
                                 <p>{product.price}$</p>
                                 <br />
-                                <button type="button">buy now</button>
+                                <button type="button" onClick={addToCart}>buy now</button>
                                 <button onClick={deleteProduct}>Delete</button>
                             </div>
                         </div>

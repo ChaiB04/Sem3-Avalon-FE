@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const hostname = 'http://localhost:8080';
 
@@ -28,21 +29,26 @@ function getProduct(id){
     })
 }
 
-function createProduct(data){
+function createProduct(data, userToken) {
     return new Promise((resolve, reject) => {
-        axios.post(`${hostname}/products`, data)
-        .then(response =>{
-            resolve(response);
+      axios.post(`${hostname}/products`, data, {
+        headers: { Authorization: `Bearer ${userToken}` }
+      })
+        .then(response => {
+          resolve(response);
         })
-        .catch(error =>{
-            reject(error);
-        })
-    })
-}
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
 
-function deleteProduct(id) {
+function deleteProduct(id, userToken) {
     return new Promise((resolve, reject) => {
-        axios.delete(`${hostname}/products/${id}`)
+        axios.delete(`${hostname}/products/${id}`,
+        {
+            headers: { Authorization: `Bearer ${userToken}` }
+          })
             .catch(error => {
                 reject(error);
             });

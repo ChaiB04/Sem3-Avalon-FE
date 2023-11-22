@@ -4,6 +4,7 @@ import styles from "../product/NewProductPage.module.css"
 import { ToastContainer, toast } from "react-toastify";
 import ProductService from "../../services/ProductService";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function NewProductPage(){
 
@@ -16,6 +17,8 @@ function NewProductPage(){
     })
     const [picture, setPicture] = useState();
     const navigate = useNavigate();
+
+    const userToken = useSelector((state) => state.token);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -60,23 +63,26 @@ function NewProductPage(){
       const handleSubmit = async (e) => {
         e.preventDefault();
         // Send a POST request to your backend API
-        await ProductService.createProduct(productData)
+        await ProductService.createProduct(productData,userToken)
           .then(() => navigate("/productpage"))
           .catch((error) => {
             if (error.response && error.response.status === 400) {
-              toast.error("Please fill in the field correctly.", {
+              toast.error(error.response.data.message, {
                 position: toast.POSITION.BOTTOM_CENTER,
                 autoClose: 5000,
                 draggable: false,
                 className: styles.toastNotification,
               });
-            } else if (error.response && error.response.data) {
-              if (error.response.data.message.includes("JSON parse error:")) {
-                toast.error("Could not create user.");
-              }
-            } else {
-              toast.error("An unknown error occurred.");
+            } 
+            else if(error.response && error.response.status === 401){
+              toast.error("You're not logged in!", {
+                position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: 5000,
+                draggable: false,
+                className: styles.toastNotification,
+              });
             }
+            
           });
       };
 
@@ -115,6 +121,7 @@ function NewProductPage(){
                     <button type="submit" className={` ${styles.buttonCreate}`} >Create</button>
                 </div>
             </form>
+            <ToastContainer toastStyle={{ backgroundColor: "#333333" }}/>
         </>
     )
 

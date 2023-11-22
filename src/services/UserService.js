@@ -39,9 +39,11 @@ function loginWithEmailAndPassword(data) {
   });
 }
 
-function editAccount(id, data) {
+function editAccount(id, data, userToken) {
   return new Promise((resolve, reject) => {
-    axios.put(`${hostname}/users/${id}`, data)
+    axios.put(`${hostname}/users/${id}`, data,  {
+      headers: { Authorization: `Bearer ${userToken}` }
+    })
       .catch(error => {
         reject(error);
       });

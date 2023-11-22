@@ -11,6 +11,7 @@ import ProductPage from './pages/product/ProductPage.jsx'
 import ProductDetailPage from './pages/product/ProductDetailPage.jsx'
 import ProfilePage from './pages/user/ProfilePage.jsx'
 import NewProductPage from './pages/product/NewProductPage.jsx'
+import CartPage from './pages/order/CartPage.jsx';
 
 function App() {
   return (    
@@ -26,6 +27,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetailPage/>}/>
           <Route path="/profilepage" element={<ProfilePage/>}/>
           <Route path="/newproductpage" element={<NewProductPage/>}/>
+          <Route path="/cart" element={<CartPage/>}/>
         </Routes>
       </Router>
     </>
