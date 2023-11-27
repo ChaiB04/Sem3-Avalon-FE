@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
+import tokenService from "../../services/TokenService";
 
 function LoginPage(){
   const [formData, setFormData] = useState({
@@ -37,36 +38,41 @@ function LoginPage(){
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Send a POST request to your backend API 
-    if (!isEmailValid(formData.email)) {
-      setErrorLoggingIn(true)
-      return; 
-    }
-    else{
+    // if (!isEmailValid(formData.email)) {
+    //   toast.
+    //   return; 
+    // }
+    // else{
      await userService.loginWithEmailAndPassword(formData)
         .then((response) => {
           if (response != undefined) {
             const token = response.accessToken;
             dispatch(setUserToken(token));
+            tokenService.setAccessToken(token)
             navigate("/");
           } else {
             toast.error("Token not found in response:", response.data);
           }
         })
       .catch(error => {
-        if (error.response) {
-          const errors = error.response.data.errors;
-          if (errors) {
-            // Handle errors here
-            toast.error("Could not find user.");
-          } else {
-            // Handle other cases when there are no errors
-          }
-        } else {
-          toast.error("Response object is undefined:", error);
+        const errors = error.response.data.properties.errors
+        if (error.response.data.status === 400) {
+          errors.forEach((error, index) => {
+            toast.error(error.error, {
+              position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 5000,
+            draggable: false,
+            className: styles.toastNotification,
+            toastId: index.toString()
+            })
+          })
+            
+          ;
         }
       })
+        
     }
-  };
+
 
 return(
   <>

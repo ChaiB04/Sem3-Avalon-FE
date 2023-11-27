@@ -13,8 +13,6 @@ import snapchatLogo from '../images/snapchatLogo.png'
 
 import flower from '../images/logo.jpg'
 import ProductCard from "../components/ProductCard.jsx";
-
-
 function HomePage(){
      const [productList, setProductList] = useState([]);
      const initialFilterState = {
@@ -31,6 +29,7 @@ function HomePage(){
           async function fetchProducts() {
                await productService.getAllProducts({params: initialFilterState}).then((response) =>{
                     setProductList(response);
+
                }).catch(error => {
                          if (error.response) {
                               const errors = error.response.data.errors;

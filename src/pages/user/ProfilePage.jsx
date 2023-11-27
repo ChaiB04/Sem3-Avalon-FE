@@ -5,6 +5,9 @@ import userService from "../../services/UserService";
 import { ToastContainer, toast } from "react-toastify";
 import ProfileInfo from "../../components/ProfileInfo";
 import EditProfileInfo from "../../components/EditProfileInfo";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import TokenService from "../../services/TokenService";
+import { userData } from "../../services/TokenService";
 
 function ProfilePage() {
 
@@ -12,13 +15,14 @@ function ProfilePage() {
     const [picture, setPicture] = useState(null);
     const [editing, setEditing] = useState(false);
     const [buttonEditText, setButtonEditText] = useState();
+    const userToken = useSelector((state) => state.token);
 
     const editPorfile = "Edit Profile";
     const goBack = "Go back";
 
     useEffect(() => {
         getUser()
-         setButtonEditText(editPorfile);
+        setButtonEditText(editPorfile);
     }, [])
   
     function enableEditing(){
@@ -26,7 +30,6 @@ function ProfilePage() {
         setButtonEditText(editPorfile);
         
         setEditing(false);
-        
       }
       else{
         setButtonEditText(goBack)
@@ -34,12 +37,18 @@ function ProfilePage() {
       }
     }
 
+    function getUserId(){
+      TokenService.setAccessToken(userToken);
+      //console.log(userData.claims)
+      return userData.claims.userId;      ;
+    }
+
     async function getUser(){
       //hardcoded right now
-      const id = 3;
+      const id = getUserId();
         await userService.getUserById(id).then((response) =>{
           setUser(response);
-          if ( response.picture) {
+          if (response.picture) {
             setPicture("data:image/png;base64," + response.picture);
           }
         })

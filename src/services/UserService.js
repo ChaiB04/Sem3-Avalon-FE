@@ -1,4 +1,5 @@
 import axios from "axios";
+import tokenService from '../services/TokenService'
 
 const hostname = 'http://localhost:8080';
 
@@ -39,11 +40,10 @@ function loginWithEmailAndPassword(data) {
   });
 }
 
+//add usertoken to set
 function editAccount(id, data, userToken) {
   return new Promise((resolve, reject) => {
-    axios.put(`${hostname}/users/${id}`, data,  {
-      headers: { Authorization: `Bearer ${userToken}` }
-    })
+    axios.put(`${hostname}/users/${id}`, data)
       .catch(error => {
         reject(error);
       });

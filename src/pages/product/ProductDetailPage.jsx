@@ -87,7 +87,7 @@ function ProductDetailPage() {
                         
                     </>
                 ) : (
-                    <p>Loading...</p>
+                    <p>Not getting the product sorry! *sad face*</p>
                 )}
             </div>
         </div>
