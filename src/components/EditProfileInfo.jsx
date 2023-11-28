@@ -43,14 +43,18 @@ function EditProfileInfo({ props }) {
         });
     };
 
+    const handleRefresh = () => {
+      window.location.reload();
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log({id});
-        console.log(props);
+        // console.log({id});
+        // console.log(props);
         // Send a POST request to your backend API
         await userService
           .editAccount(id, formData)
-          .then()
+          .then(handleRefresh())
           .catch((error) => {
             if (error.response && error.response.status === 400) {
               toast.error("Please fill in the field correctly.", {

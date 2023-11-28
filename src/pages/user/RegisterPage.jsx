@@ -71,22 +71,22 @@ function RegisterPage(){
     await userService
       .createUser(formData)
       .then(() => navigate("/login"))
-      .catch((error) => {
-        if (error.response && error.response.status === 400) {
-          toast.error("Please fill in the field correctly.", {
-            position: toast.POSITION.BOTTOM_CENTER,
+      .catch(error => {
+        const errors = error.response.data.properties.errors
+        if (error.response.data.status === 400) {
+          errors.forEach((error, index) => {
+            toast.error(error.error, {
+              position: toast.POSITION.BOTTOM_CENTER,
             autoClose: 5000,
             draggable: false,
             className: styles.toastNotification,
-          });
-        } else if (error.response && error.response.data) {
-          if (error.response.data.message.includes("JSON parse error:")) {
-            toast.error("Could not create user.");
-          }
-        } else {
-          toast.error("An unknown error occurred.");
+            toastId: index.toString()
+            })
+          })
+            
+          ;
         }
-      });
+      })
   };
 
 return(
@@ -139,7 +139,7 @@ return(
         <br/>
         <button type="submit" className={` ${styles.buttonLogin}`} >Register</button>
     </form>
-    <ToastContainer toastStyle={{ backgroundColor: "#333333" }}/>
+    <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
   </>
 
 )

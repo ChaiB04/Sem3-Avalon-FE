@@ -3,6 +3,8 @@ import orderService from '/Users/cbaha/individual-project-fe-sem3/src/services/O
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import styles from './CartPage.module.css'
 import { useNavigate } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
+
 
 function CartPage(){
     const [productList, setProductList] = useState([])
@@ -14,12 +16,13 @@ function CartPage(){
         bundle_or_not: false,
         date_of_purchase: new Date().toISOString().split('T')[0]
     })
-
+ 
     const navigate = useNavigate();
 
     useEffect(() => {
         getCartProducts(); 
     }, [userToken])
+
 
     const getCartProducts = () => {
         try {
@@ -79,20 +82,13 @@ function CartPage(){
            handleRefresh()
           }
         } catch (error) {
-          console.error("Error while removing item from cart:", error);
+          toast.error("Error while removing item from cart:", error);
         }
       };
 
       const handleCheckboxChange = (event) => {
         setFormData({...formData, bundle_or_not: event.target.checked});
       };
-
-      function setList() {
-        setFormData({ ...formData, products: productList });
-        setFormData({ ...formData, name: "changed" });
-        console.log(formData)
-      }
-
 
       async function CreateOrder(){
         console.log(formData)
@@ -159,7 +155,7 @@ function CartPage(){
                     <p> Total: ${getTotalPrice()}</p>
                     <button onClick={CreateOrder}>Pay now</button>
             </div>
-
+            <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
         </>
     )
 }

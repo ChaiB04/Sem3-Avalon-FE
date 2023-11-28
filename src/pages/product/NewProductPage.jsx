@@ -66,21 +66,30 @@ function NewProductPage(){
         await ProductService.createProduct(productData,userToken)
           .then(() => navigate("/productpage"))
           .catch((error) => {
-            if (error.response && error.response.status === 400) {
-              toast.error(error.response.data.message, {
-                position: toast.POSITION.BOTTOM_CENTER,
+            const errors = error.response.data.properties.errors
+            if (error.response.data.status === 400) {
+              errors.forEach((error, index) => {
+                toast.error(error.error, {
+                  position: toast.POSITION.BOTTOM_CENTER,
                 autoClose: 5000,
                 draggable: false,
                 className: styles.toastNotification,
-              });
-            } 
-            else if(error.response && error.response.status === 401){
-              toast.error("You're not logged in!", {
-                position: toast.POSITION.BOTTOM_CENTER,
+                toastId: index.toString()
+                })
+              })
+                
+              ;
+            }
+            else if(error.response.data.status === 401){
+              errors.forEach((error, index) => {
+                toast.error(error.error, {
+                  position: toast.POSITION.BOTTOM_CENTER,
                 autoClose: 5000,
                 draggable: false,
                 className: styles.toastNotification,
-              });
+                toastId: index.toString()
+                })
+              })
             }
             
           });
@@ -114,14 +123,25 @@ function NewProductPage(){
 
                         <input className={styles.textBoxes} type="text" name="price"  placeholder="Price" value={productData.price} onChange={handleInputChange} required/>
 
-                        <input className={styles.textBoxes} type="text" name="color"  placeholder="Color" value={productData.color} onChange={handleInputChange} required/>
-                    
+                       <div className={styles.colorDropdown}>
+                          <label htmlFor="colorDropdown" >color:</label>
+                          <select type="text" id="colorDropdown" name="color" placeholder="Color" value={productData.color} onChange={handleInputChange} required>
+                            <option value="pink">Pink</option>
+                            <option value="blue">Blue</option>
+                            <option value="orange">Orange</option>
+                            <option value="green">Green</option>
+                            <option value="white">White</option>
+                            <option value="black">Black</option>
+                            <option value="purple">Purple</option>
+                          </select>
+                        </div>
+
                         <input className={styles.textBoxes} type="text" name="description"  placeholder="Description" value={productData.description} onChange={handleInputChange} required/>
                     </div>
                     <button type="submit" className={` ${styles.buttonCreate}`} >Create</button>
                 </div>
             </form>
-            <ToastContainer toastStyle={{ backgroundColor: "#333333" }}/>
+            <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
         </>
     )
 

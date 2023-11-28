@@ -16,7 +16,6 @@ function LoginPage(){
     password: ""
   });
 
-  const [errorLoggingIn, setErrorLoggingIn] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,25 +29,13 @@ function LoginPage(){
     });
   };
 
-  const isEmailValid = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Send a POST request to your backend API 
-    // if (!isEmailValid(formData.email)) {
-    //   toast.
-    //   return; 
-    // }
-    // else{
      await userService.loginWithEmailAndPassword(formData)
         .then((response) => {
           if (response != undefined) {
             const token = response.accessToken;
             dispatch(setUserToken(token));
-            tokenService.setAccessToken(token)
             navigate("/");
           } else {
             toast.error("Token not found in response:", response.data);
@@ -85,7 +72,7 @@ return(
          <button type="submit" className={` ${styles.buttonLogin}`}>Login</button>
     </form>
 
-    <ToastContainer toastStyle={{ backgroundColor: "#333333" }}/>
+    <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
 
   </>
 

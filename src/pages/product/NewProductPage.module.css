@@ -12,6 +12,29 @@
 }
 
 
+.colorDropdown{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4vh;
+  }
+  
+  .colorDropdown label {
+    color: #5D3F58;
+  }
+  
+  .colorDropdown select {
+    color: #ECE1E7;
+    background-color: #370d30;
+    border:none; /* Optional: Remove the default border if you want a cleaner look */
+  }
+  
+  .colorDropdown option {
+    color: #ECE1E7;
+    background-color: #370d30;
+  }
+  
+
+
 .divsOnRow{
     display:flex;
     flex-flow: row;

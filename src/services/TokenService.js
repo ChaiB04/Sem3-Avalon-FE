@@ -19,11 +19,12 @@ const TokenService = {
         const claims = jwtDecode(token);
         userData.claims = claims;
         return claims;
-    },
-    clear: () => {
-        userData.accessToken = undefined;
-        userData.claims = undefined;
     }
+    // ,
+    // clear: () => {
+    //     userData.accessToken = undefined;
+    //     userData.claims = undefined;
+    // }
 }
 
 export default TokenService;

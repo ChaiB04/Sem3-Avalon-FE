@@ -23,13 +23,37 @@
   }
 
   .filterbox {
-    height: 50vh;  
+    height: 30vh;  
     background-color: #5D3F58; 
     margin-right:5%;
     margin-left:5%;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
+
+.colorDropdown{
+  margin-top:15%;
+  display: flex;
+  flex-direction: column;
+}
+
+.colorDropdown label {
+  color: #ECE1E7;
+}
+
+.colorDropdown select {
+  color: #ECE1E7;
+  background-color: #370d30;
+  border:none; /* Optional: Remove the default border if you want a cleaner look */
+}
+
+.colorDropdown option {
+  color: #ECE1E7;
+  background-color: #370d30;
+}
+
   
   .filterandproductcontainer {
     display: flex;
@@ -60,6 +84,7 @@
   /* price selector */
   
   .range__slider {
+    margin-top: 20%;
     width:80%;
     height: 100px;
   }

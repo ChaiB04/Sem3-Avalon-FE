@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from './ProductPage.module.css';
 import productService from '../../services/ProductService.js';
 import ProductCard from "/Users/cbaha/individual-project-fe-sem3/src/components/ProductCard.jsx";
+import { ToastContainer, toast } from "react-toastify";
 
 function ProductPage() {
   const [productList, setProductList] = useState([]);
@@ -24,14 +25,23 @@ function ProductPage() {
     };
     await productService.getAllProducts({ params: data }).then((response) => {
       setProductList(response);
-    }).catch(error => {
-      if (error.response) {
-        const errors = error.response.data.errors;
-        if (errors) {
-          toast.error("Could not find products.");
-        }
+    })
+    .catch(error => {
+      const errors = error.response.data.properties.errors
+      if (error.response.data.status === 400) {
+        errors.forEach((error, index) => {
+          toast.error(error.error, {
+            position: toast.POSITION.BOTTOM_CENTER,
+          autoClose: 5000,
+          draggable: false,
+          className: styles.toastNotification,
+          toastId: index.toString()
+          })
+        })
+          
+        ;
       }
-    });
+    })
   }
 
   const handleInputChange = (e) => {
@@ -68,6 +78,20 @@ function ProductPage() {
                               <div className="price-max">$0 - ${Price}</div>
                          </div>
                     </div>
+                    
+                    <div className={styles.colorDropdown}>
+                      <label htmlFor="colorDropdown" >color:</label>
+                      <select type="text" id="colorDropdown" name="color" placeholder="Color" value={initialFilterState.color} onChange={handleInputChange} required>
+                        <option value="">All</option>
+                        <option value="pink">Pink</option>
+                        <option value="blue">Blue</option>
+                        <option value="orange">Orange</option>
+                        <option value="green">Green</option>
+                        <option value="white">White</option>
+                        <option value="black">Black</option>
+                        <option value="purple">Purple</option>
+                      </select>
+                    </div>
 
           </div>
         </form>
@@ -84,6 +108,7 @@ function ProductPage() {
           </div>
         </div>
       </div>
+      <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
     </div>
   );
 }

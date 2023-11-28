@@ -6,13 +6,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import productService from '../services/ProductService.js'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import twitterLogo from '../images/twitterLogo.png'
 import instagramLogo from '../images/instagramLogo.png'
 import snapchatLogo from '../images/snapchatLogo.png'
 
-import flower from '../images/logo.jpg'
+import ImageCarousel from '../components/ImageCarousel.jsx';
+import bouquet from '../images/bouquetHomePage.jpg'
+import flowerfield from '../images/FlowerFieldHomePages.jpeg'
+import roses from '../images/roses.jpeg'
 import ProductCard from "../components/ProductCard.jsx";
+
 function HomePage(){
      const [productList, setProductList] = useState([]);
      const initialFilterState = {
@@ -20,6 +23,12 @@ function HomePage(){
           price: 0,
           color: null
      }
+
+          const images = [
+               flowerfield,
+               bouquet
+          ];
+
 
      useEffect(() => {
           fetchProducts(); 
@@ -29,16 +38,25 @@ function HomePage(){
           async function fetchProducts() {
                await productService.getAllProducts({params: initialFilterState}).then((response) =>{
                     setProductList(response);
-
-               }).catch(error => {
-                         if (error.response) {
-                              const errors = error.response.data.errors;
-                              if (errors) {
-                              toast.error("Could not find products.");
-                              }
-                         }
                })
+               .catch(error => {
+                    const errors = error.response.data.properties.errors
+                    if (error.response.data.status === 400) {
+                      errors.forEach((error, index) => {
+                        toast.error(error.error, {
+                          position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 5000,
+                        draggable: false,
+                        className: styles.toastNotification,
+                        toastId: index.toString()
+                        })
+                      })
+                        
+                      ;
+                    }
+                  })
           }
+
 
 return (
     <>
@@ -56,7 +74,18 @@ return (
                <div className={styles.line}></div>
                <p className={styles.info_details}>Buy a variety of beautiful house planted flowers.</p>
                <div className={styles.info_pictures}>
+                     {/* <ImageCarousel images={images} />  */}
                </div>
+
+               {/* <div className={styles.info_pictures}>
+                    <div className={styles.carouselcontainer}>
+                         <div className={styles.carousel}>
+                              <img src={flowerfield} className={styles.slide}/>
+                              <img src={bouquet} className={styles.slide}/>
+                              <img src={roses} className={styles.slide}/>
+                         </div>
+                    </div>
+               </div> */}
 
                <div className={styles.popular_items_container}>
                     <p className={styles.popular_title}>Popular</p>
@@ -83,6 +112,7 @@ return (
                               </div>
                          </div>
                </div>
+               <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
           </div>
      </>
 )

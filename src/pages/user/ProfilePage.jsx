@@ -37,6 +37,8 @@ function ProfilePage() {
       }
     }
 
+
+
     function getUserId(){
       TokenService.setAccessToken(userToken);
       //console.log(userData.claims)
@@ -53,13 +55,21 @@ function ProfilePage() {
           }
         })
         .catch(error => {
-          if (error.response) {
-               const errors = error.response.data.errors;
-               if (errors) {
-               toast.error("Could not find products.");
-               }
+          const errors = error.response.data.properties.errors
+          if (error.response.data.status === 400) {
+            errors.forEach((error, index) => {
+              toast.error(error.error, {
+                position: toast.POSITION.BOTTOM_CENTER,
+              autoClose: 5000,
+              draggable: false,
+              className: styles.toastNotification,
+              toastId: index.toString()
+              })
+            })
+              
+            ;
           }
-})
+        })
     }
 
 
@@ -98,6 +108,7 @@ function ProfilePage() {
         </div>
        
       </div>
+      <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
     </>
   );
 }

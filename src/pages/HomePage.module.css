@@ -8,6 +8,14 @@
     
 } */
 
+.pictureContainer {
+  height: 192px;
+  margin-left: 10%;
+  overflow: hidden;
+  margin-bottom: 60px;
+  /* Add any common styles here */
+}
+
 
 /* body settings */
 body{
@@ -93,6 +101,7 @@ body{
     margin-left:10%;
     font-size: 30px;
     overflow: hidden;
+    word-break: keep-all;
 }
 
 .info_pictures{
@@ -238,3 +247,49 @@ body{
     padding-top: 10px; 
   }
 }
+
+
+
+/* 
+.info_pictures {
+  height: 192px;
+  width: 80vw;
+  margin-left: 10%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+ 
+  margin-bottom: 60px;
+}
+
+.carouselcontainer {
+  overflow: hidden;
+}
+
+
+.slide {
+  box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+
+}
+
+.carousel {
+  display: flex;
+  width: 100vw;
+  scroll-snap-type: x mandatory;
+  animation: carousel-scroll 5s infinite ease-in-out;
+}
+
+@keyframes carousel-scroll {
+  0%, 33.33% {
+    transform: translateX(0%);
+  }
+  33.34%, 66.66% {
+    transform: translateX(-33%);
+  }
+  66.67%, 100% {
+    transform: translateX(-66%);
+  }
+} */

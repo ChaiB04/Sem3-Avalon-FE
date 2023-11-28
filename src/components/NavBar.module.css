@@ -6,16 +6,22 @@
   font-style: normal;
 }
 
+
+.rightcontainer{
+  display: flex;
+  justify-content: row;
+}
+
 .cartbutton{
   display: flex;
-  flex-flow: end;
   padding: 0;
   border: none;
+  margin-right: 15px;
   background: url('../images/basket.png') no-repeat center center;
   background-size: cover;
   width: 50px; /* Adjust the width as needed */
   height: 50px; /* Adjust the height as needed */
-  cursor: pointer;
+  justify-content: flex-end;
 }
 
 .navBar {
@@ -57,9 +63,8 @@
 /* Style for the container <div> of the dropdown */
 .navbar .dropdown {
   display: flex;
-  justify-content: flex-end; /* Keep this for the button on the right side */
-  position: relative; /* Add position: relative to make absolute positioning relative to this container */
-}
+  justify-content: flex-end;
+  position: relative; }
 
 /* Style for the dropdown content (Hidden by Default) */
 .dropdownContent {

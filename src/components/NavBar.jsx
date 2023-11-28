@@ -5,16 +5,33 @@ import { useSelector } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/features/userSlice"; 
+import { useNavigate } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
 
 function NavBar() {
 
     
     const userToken = useSelector((state) => state.token);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleLogOut = (e) => {
+    const handleLogOut = () => {
+        localStorage.removeItem('cart');
         dispatch(logout());
         //localStorage.clear();
+    }
+
+    const redirectToCart = () => {
+        if( userToken !== null){
+            navigate("/cart");
+        }
+        else{
+            toast.info("You're not logged in!", {
+                position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: 5000,
+                draggable: false,
+            });
+        }
     }
 
     const AuthenticatedLinks = [
@@ -62,10 +79,13 @@ function NavBar() {
     const links = userToken ? AuthenticatedLinks : UnauthenticatedLinks;
 
     return (
-        <nav className={styles.navBar}>
+        <>
+                <nav className={styles.navBar}>
             <NavLink to="/" className={styles.headerBrand}>Avalon</NavLink>
-            <button className={styles.cartbutton}/>
+           <div className={styles.rightcontainer}>
+           <button onClick={redirectToCart} className={styles.cartbutton}/>
             <div className={styles.dropdown}>
+
                 <button className={styles.dropbtn}>Menu</button>
                 <div className={styles.dropdownContent}>
                     {links.map(link => {
@@ -78,7 +98,10 @@ function NavBar() {
                     {userToken ? <NavLink to="/" onClick={handleLogOut} className={styles.navLink}>Log out</NavLink> : null}
                 </div>
             </div>
+           </div>
         </nav>
+           
+        </>
     );
 }
 
