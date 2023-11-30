@@ -10,7 +10,6 @@ import twitterLogo from '../images/twitterLogo.png'
 import instagramLogo from '../images/instagramLogo.png'
 import snapchatLogo from '../images/snapchatLogo.png'
 
-import ImageCarousel from '../components/ImageCarousel.jsx';
 import bouquet from '../images/bouquetHomePage.jpg'
 import flowerfield from '../images/FlowerFieldHomePages.jpeg'
 import roses from '../images/roses.jpeg'

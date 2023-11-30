@@ -18,7 +18,6 @@ function EditProfileInfo({ props }) {
     });
 
     useEffect(() => {
-        // Update the form data when the component mounts or when the user prop changes
         if (props) {
             setId(props.id);
             setFormData({

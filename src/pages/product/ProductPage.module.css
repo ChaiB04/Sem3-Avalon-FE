@@ -9,13 +9,13 @@
     width:70%;
     background-color: #ECE1E7;
     border: 2px solid #5D3F58;
-    margin-right: 8px; /* Add some margin between the text box and button */
+    margin-right: 8px;
     height: 40px;
     color: #5D3F58;
   }
   
   .button {
-    flex: 1; /* Allow the button to take up available space */
+    flex: 1; 
     background-color: #5D3F58;
     color: #ECE1E7;
     border-radius: 25px;
@@ -46,7 +46,7 @@
 .colorDropdown select {
   color: #ECE1E7;
   background-color: #370d30;
-  border:none; /* Optional: Remove the default border if you want a cleaner look */
+  border:none;
 }
 
 .colorDropdown option {
@@ -80,8 +80,6 @@
     padding:5px;
 
   }
-
-  /* price selector */
   
   .range__slider {
     margin-top: 20%;
@@ -137,7 +135,6 @@
     background: #4f6171;
   }
   
-  /* remove border */
   input::-moz-focus-inner, input::-moz-focus-outer {
     border: 0;
   }

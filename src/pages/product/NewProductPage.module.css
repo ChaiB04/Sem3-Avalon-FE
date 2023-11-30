@@ -25,7 +25,7 @@
   .colorDropdown select {
     color: #ECE1E7;
     background-color: #370d30;
-    border:none; /* Optional: Remove the default border if you want a cleaner look */
+    border:none;
   }
   
   .colorDropdown option {

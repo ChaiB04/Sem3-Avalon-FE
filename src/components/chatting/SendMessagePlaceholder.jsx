@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import styles from './ChatMessages.module.css';
+
+
 const SendMessagePlaceholder = (props) =>{
     const [message, setMessage] = useState('');
     const [destinationUsername, setDestinationUsername] = useState('');
@@ -27,12 +30,8 @@ const SendMessagePlaceholder = (props) =>{
 
     return(
         <>
-        <form onSubmit={onSubmit}>
-            <label htmlFor='message'>Message:</label>
-                <input id='message' type='text' onChange={(event) => setMessage(event.target.value)} value={message}></input>
-                <br />
-            <label htmlFor='destUsername'>Destination:</label>
-                <input id='destUsername' type='text' onChange={(event) => setDestinationUsername(event.target.value)}></input>
+        <form onSubmit={onSubmit} className={styles.form}>
+            <input id='message' type='text' onChange={(event) => setMessage(event.target.value)} value={message}></input>
             <button onClick={onMessageSend}>Send</button>
         </form>
         </>

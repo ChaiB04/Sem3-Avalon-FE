@@ -1,0 +1,77 @@
+
+.ChatMessages {
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; 
+  height: 55vh;
+}
+
+.form{
+  display: flex;
+}
+
+.form input{
+    display:flex;
+    background-color:#ECE1E7;
+    border-style: solid;
+    border-color: #5D3F58;
+    margin-bottom: 4vh;
+    /* padding-right:20vw; */
+    width: 80%;
+    height:40px;
+    color: #5D3F58;
+}
+
+.form button{
+  background-color: #5D3F58;
+  color:#ECE1E7;
+  border-radius: 25px;
+  border-style: none;
+  width: 25%;
+  height: 20%;
+  margin-left: 5px;
+}
+
+.messageHolder {
+  width: 80vw;
+  height: 60vh;
+}
+
+.Message {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 15px;
+}
+
+.ReceivedMessage {
+  background-color: #ECE1E7;
+  width: 70%;
+  word-break: keep-all;
+  box-shadow: 0 4px 8px rgba(93, 63, 88, 0.3);
+  align-self: flex-end; 
+}
+
+.ReceivedMessage b {
+  color: #5D3F58; 
+}
+
+.DirectMessage {
+  background-color: #5D3F58;
+  color: #ECE1E7;
+  box-shadow: 0 4px 8px rgba(93, 63, 88, 0.3);
+  width: 70%;
+  word-break: keep-all;
+  align-self: flex-start; 
+}
+
+.DirectMessage b {
+  color: #ECE1E7;
+}
+
+@media (max-width: 600px) {
+  .ChatMessages {
+    max-width: 100%;
+  }
+}

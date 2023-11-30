@@ -13,6 +13,7 @@ import ProfilePage from './pages/user/ProfilePage.jsx'
 import NewProductPage from './pages/product/NewProductPage.jsx'
 import CartPage from './pages/order/CartPage.jsx';
 import ChatPage from './pages/ChatPage.jsx'
+import CustomerServiceButton from './components/chatting/CustomerServiceButton.jsx';
 
 function App() {
   return (    
@@ -31,6 +32,7 @@ function App() {
           <Route path="/cart" element={<CartPage/>}/>
           <Route path="/chat" element={<ChatPage/>}/>
         </Routes>
+        <CustomerServiceButton/>
       </Router>
     </>
   )

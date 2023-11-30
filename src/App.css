@@ -79,3 +79,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #5D3F58; 
 }
+
+.customerservicebutton{
+  position: absolute;
+  padding-bottom: 0;
+}

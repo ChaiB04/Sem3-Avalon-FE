@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styles from './ProductCard.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
 
