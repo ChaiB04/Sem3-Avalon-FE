@@ -4,8 +4,9 @@ import NavBar from './components/NavBar.jsx';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/user/LoginPage.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import RegisterPage from './pages/user/RegisterPage.jsx';
 import ProductPage from './pages/product/ProductPage.jsx'
 import ProductDetailPage from './pages/product/ProductDetailPage.jsx'

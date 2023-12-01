@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from './ProductPage.module.css';
 import productService from '../../services/ProductService.js';
-import ProductCard from "/Users/cbaha/individual-project-fe-sem3/src/components/ProductCard.jsx";
+import ProductCard from "../../components/ProductCard.jsx";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import tokenService, { userData } from '../../services/TokenService'
+import { useSelector } from "react-redux";
 
 function ProductPage() {
   const [productList, setProductList] = useState([]);
@@ -12,10 +15,21 @@ function ProductPage() {
     color: ""
   });
   const [Price, setPrice] = useState(0);
+  const navigate = useNavigate();
+
+  const [isAdmin, setIsAdmin] = useState(false);
+  const userToken = useSelector((state) => state.token);
 
   useEffect(() => {
     fetchProducts();
   }, [initialFilterState, Price]);
+
+  function CheckRole(){
+    tokenService.setAccessToken(userToken);
+    if(userData.claims.roles === "ADMINISTRATOR"){
+      setIsAdmin(true);
+    }
+  }
 
   async function fetchProducts() {
     const data = {
@@ -25,6 +39,7 @@ function ProductPage() {
     };
     await productService.getAllProducts({ params: data }).then((response) => {
       setProductList(response);
+      CheckRole();
     })
     .catch(error => {
       const errors = error.response.data.properties.errors
@@ -67,7 +82,11 @@ function ProductPage() {
           <button type="submit" className={` ${styles.button}`} >Get All Products</button>
           </form>
       </div>
-
+      {isAdmin ? (
+         <button className={`${styles.button}`} onClick={() => navigate("/newproductpage")}>Create new product</button>
+      ) : (
+        <></>
+      )}
       <div className={styles.filterandproductcontainer}>
         <form onSubmit={fetchProducts}>
           <div className={styles.filterbox}>

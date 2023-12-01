@@ -66,7 +66,7 @@ function ProductDetailPage() {
     }
 
     async function deleteProduct(){
-        await productService.deleteProduct(product.id)
+        await productService.deleteProduct(product.id, userToken)
         .then(navigate("/productpage"))
         .catch(error => {
             const errors = error.response.data.properties.errors

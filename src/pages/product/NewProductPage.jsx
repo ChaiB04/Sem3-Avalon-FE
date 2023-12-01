@@ -138,8 +138,9 @@ function NewProductPage(){
 
                         <input className={styles.textBoxes} type="text" name="description"  placeholder="Description" value={productData.description} onChange={handleInputChange} required/>
                     </div>
-                    <button type="submit" className={` ${styles.buttonCreate}`} >Create</button>
+                  
                 </div>
+                <button type="submit" className={` ${styles.buttonCreate}`} >Create</button>
             </form>
             <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
         </>

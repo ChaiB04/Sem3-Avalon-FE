@@ -4,13 +4,15 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import styles from './CartPage.module.css'
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
-
+import tokenService, { userData } from '../../services/TokenService';
 
 function CartPage(){
     const [productList, setProductList] = useState([])
+    const [orderHistory, setOrderHistory] = useState([]);
     const userToken = useSelector((state) => state.token);
+    const [userId, setUserId] = useState();
     const [formData, setFormData] = useState({
-        userId: 1,
+        userId: userId,
         products: [],
         name: "default",
         bundle_or_not: false,
@@ -20,11 +22,45 @@ function CartPage(){
     const navigate = useNavigate();
 
     useEffect(() => {
+        setUserIdFromToken();  
         getCartProducts(); 
-    }, [userToken])
+        getOrderHistory();
+    }, [userId])
 
+
+    function setUserIdFromToken(){
+      tokenService.setAccessToken(userToken)
+      setUserId(userData.claims.userId);
+    }
+
+    async function getOrderHistory(){
+      await orderService.getOrderHistory(userId, userToken)
+              .then(response => {
+                const responseOrders = response.data.allOrders;
+                setOrderHistory(response.data.allOrders);
+                console.log(responseOrders);
+              })
+              .catch(error => {
+                if (error.response.data.status === 400) {
+                  const errors = error.response.data.properties.errors
+                  errors.forEach((error, index) => {
+                    toast.error(error.error, {
+                    position: toast.POSITION.BOTTOM_CENTER,
+                    autoClose: 5000,
+                    draggable: false,
+                    className: styles.toastNotification,
+                    toastId: index.toString()
+                    })
+                  })
+                    
+                  ;
+                }
+              })
+              
+    }
 
     const getCartProducts = () => {
+
         try {
             const cartString = localStorage.getItem("cart");
             if (cartString) {
@@ -35,8 +71,8 @@ function CartPage(){
                 return [];
             }
         } catch (error) {
-            const errors = error.response.data.properties.errors
             if (error.response.data.status === 400) {
+              const errors = error.response.data.properties.errors
               errors.forEach((error, index) => {
                 toast.error(error.error, {
                   position: toast.POSITION.BOTTOM_CENTER,
@@ -96,8 +132,8 @@ function CartPage(){
         await orderService.createOrder(formData, userToken)
         .then(navigate("/"))
         .catch(error => {
-          const errors = error.response.data.properties.errors
           if (error.response.data.status === 400) {
+            const errors = error.response.data.properties.errors
             errors.forEach((error, index) => {
               toast.error(error.error, {
                 position: toast.POSITION.BOTTOM_CENTER,
@@ -113,9 +149,23 @@ function CartPage(){
         })
       }
 
+      const getTotalItems = (order) => {
+        return order.products.reduce((total, product) => total + product.quantity, 0);
+      };
+      
+      // Calculate and print total items for each order
+     
+
+
+      function formatDate(orderdate){
+        const purchaseDate = new Date(orderdate);
+        return`${purchaseDate.toLocaleDateString()}`;
+      }
+
     return(
         <>
-            <div className={styles.container}>
+        <div className={styles.page}>
+        <div className={styles.container}>
                 <h3>Your products</h3>
                 {productList.length > 0 ? (
                     productList.map((product) => (
@@ -155,6 +205,25 @@ function CartPage(){
                     <p> Total: ${getTotalPrice()}</p>
                     <button onClick={CreateOrder}>Pay now</button>
             </div>
+
+             
+            <h4 className={styles.previousOrdersTitle}>Previous orders</h4>
+            <div className={styles.line}></div>
+            {orderHistory.length > 0 ? (
+              orderHistory.map(order => (
+                <>
+                <div className={styles.orderPreview} key={order.id}>
+                  <h4>{formatDate(order.dateOfPurchase)}</h4>
+                  <p>Total Price:</p>
+                  <p>amount of items: {getTotalItems(order)}</p>
+                </div>
+                <div className={styles.line}></div> 
+                </>
+              ))
+            ) : (
+              <p>No Order's available.</p>
+            )}
+        </div>
             <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
         </>
     )
