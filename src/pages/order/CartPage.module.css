@@ -9,7 +9,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
 }
 
-.container h3{
+.OrderContainer{
+    overflow: auto;
+}
+
+.container h3, h4{
     color: #5D3F58;
 }
 
@@ -18,13 +22,18 @@
     flex-direction: column;
 }
 
+.totalprice{
+    font-weight: 600;
+}
 
-.productcontainer{
+.productcontainer {
     margin-top: 15px;
-    display:flex;
+    display: flex;
     flex-direction: row;
     height: 150px;
-}
+  }
+  
+  
 
 .picturecontainer{
     display: flex;
@@ -67,6 +76,7 @@
     justify-content: center;
 }
 
+
 .buttoncontainer button{
     border-radius: 100%;
     background-color: rgb(148, 83, 96);
@@ -94,4 +104,21 @@
     color: #5D3F58;
     margin-top: 50px;
     font-weight:800;
+}
+
+.paynowbutton{
+    background-color: #5D3F58;
+    color: #ECE1E7;
+}
+
+.bundledCheckbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.bundledCheckbox p{
+    align-self: center;
+    margin-left: 5px;
 }

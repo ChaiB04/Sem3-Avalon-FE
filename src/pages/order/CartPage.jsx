@@ -10,9 +10,8 @@ function CartPage(){
     const [productList, setProductList] = useState([])
     const [orderHistory, setOrderHistory] = useState([]);
     const userToken = useSelector((state) => state.token);
-    const [userId, setUserId] = useState();
     const [formData, setFormData] = useState({
-        userId: userId,
+        userId: setUserIdFromToken(),
         products: [],
         name: "default",
         bundle_or_not: false,
@@ -21,24 +20,25 @@ function CartPage(){
  
     const navigate = useNavigate();
 
-    useEffect(() => {
-        setUserIdFromToken();  
+
+    useEffect(() => { 
         getCartProducts(); 
         getOrderHistory();
-    }, [userId])
+    }, [userToken])
 
 
     function setUserIdFromToken(){
       tokenService.setAccessToken(userToken)
-      setUserId(userData.claims.userId);
+      return userData.claims.userId;
     }
 
     async function getOrderHistory(){
-      await orderService.getOrderHistory(userId, userToken)
+      
+      await orderService.getOrderHistory(setUserIdFromToken(), userToken)
               .then(response => {
                 const responseOrders = response.data.allOrders;
-                setOrderHistory(response.data.allOrders);
-                console.log(responseOrders);
+                setOrderHistory(response.data.allOrders.reverse());
+                // console.log(responseOrders.reverse());
               })
               .catch(error => {
                 if (error.response.data.status === 400) {
@@ -93,11 +93,11 @@ function CartPage(){
         if (product && product.base64picture) {
             return "data:image/png;base64," + product.base64picture;
         }
-    }
+        else{
+          return null;
 
-    function getTotalPrice() {
-        return productList.reduce((total, product) => total + product.price, 0);
-    }
+    }        }
+
 
     const handleRefresh = () => {
         window.location.reload();
@@ -127,10 +127,14 @@ function CartPage(){
       };
 
       async function CreateOrder(){
-        console.log(formData)
+        //console.log(formData)
         
         await orderService.createOrder(formData, userToken)
-        .then(navigate("/"))
+        .then(()=>{
+          localStorage.removeItem('cart');
+          navigate("/");
+        }
+        )
         .catch(error => {
           if (error.response.data.status === 400) {
             const errors = error.response.data.properties.errors
@@ -149,14 +153,14 @@ function CartPage(){
         })
       }
 
-      const getTotalItems = (order) => {
-        return order.products.reduce((total, product) => total + product.quantity, 0);
+      const getTotalPriceHistory = (order) => {
+        return order.products.reduce((total, product) => total + product.price, 0);
       };
+
+      function getTotalPrice() {
+        return productList.reduce((total, product) => total + product.price, 0);
+      }
       
-      // Calculate and print total items for each order
-     
-
-
       function formatDate(orderdate){
         const purchaseDate = new Date(orderdate);
         return`${purchaseDate.toLocaleDateString()}`;
@@ -167,9 +171,11 @@ function CartPage(){
         <div className={styles.page}>
         <div className={styles.container}>
                 <h3>Your products</h3>
+                <div className={styles.OrderContainer}>
                 {productList.length > 0 ? (
-                    productList.map((product) => (
-                        <div key={product.id} className={styles.productcontainer}>
+                    productList.map((product, index) => (
+                      <div>
+                        <div key={index}  className={styles.productcontainer}>
                             <div className={styles.picturecontainer}>
                             {product.base64picture !== null ? (
                                 <img src={setPicture(product)} alt="ProductPicture" />
@@ -189,33 +195,38 @@ function CartPage(){
                                 <div className={styles.buttoncontainer}>
                                     <button onClick={() => removeItemFromCart(product.id)}>X</button>
                                 </div>
-                            
+                              
                         </div>
+                        <div className={styles.line}></div>
+                       </div>
                     ))
                     ) : (
                     <p>No products in cart.</p>
                     )}
 
+                    </div>
                     <div className={styles.line}></div>
-                    <input
+                   <div className={styles.bundledCheckbox}>
+                   <input
                     type="checkbox"
                     checked={formData.bundle_or_not}
                     onChange={handleCheckboxChange}
-                    />
-                    <p> Total: ${getTotalPrice()}</p>
-                    <button onClick={CreateOrder}>Pay now</button>
+                    /> <p>Do you want it to be bundled?</p>
+                   </div>
+                    <p className={styles.totalprice}> Total: ${getTotalPrice()}</p>
+                    <button className={styles.paynowbutton} onClick={CreateOrder}>Pay now</button>
             </div>
 
              
             <h4 className={styles.previousOrdersTitle}>Previous orders</h4>
             <div className={styles.line}></div>
             {orderHistory.length > 0 ? (
-              orderHistory.map(order => (
+              orderHistory.map((order, index) => (
                 <>
-                <div className={styles.orderPreview} key={order.id}>
-                  <h4>{formatDate(order.dateOfPurchase)}</h4>
-                  <p>Total Price:</p>
-                  <p>amount of items: {getTotalItems(order)}</p>
+                <div className={styles.orderPreview} key={index}>
+                  <h4 onClick={() => navigate("/PreviousOrderPage", {state: {Order: order}})}>{formatDate(order.dateOfPurchase)}</h4>
+                  <p>Total Price: {getTotalPriceHistory(order)}</p>
+                  <p>amount of items: {order.products.length}</p>
                 </div>
                 <div className={styles.line}></div> 
                 </>

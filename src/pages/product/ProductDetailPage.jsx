@@ -29,6 +29,12 @@ function ProductDetailPage() {
             const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
             const updatedCart = [...existingCart, product];
             localStorage.setItem('cart', JSON.stringify(updatedCart));
+            toast.success("Added to your cart!", {
+                position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: 5000,
+                draggable: false,
+                className: styles.toastNotification
+            })
         }
         else{
             toast.info("Please log in to buy the product!", {
@@ -107,7 +113,7 @@ function ProductDetailPage() {
                             <div className={styles.productpricebtn}>
                                 <p>{product.price}$</p>
                                 <br />
-                                <button type="button" onClick={addToCart}>buy now</button>
+                                <button type="button" onClick={() => addToCart()}>buy now</button>
                                 {isAdmin ? (
                                     <button onClick={deleteProduct}>Delete</button>
                                 ): (

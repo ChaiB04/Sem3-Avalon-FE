@@ -15,6 +15,7 @@ import NewProductPage from './pages/product/NewProductPage.jsx'
 import CartPage from './pages/order/CartPage.jsx';
 import ChatPage from './pages/ChatPage.jsx'
 import CustomerServiceButton from './components/chatting/CustomerServiceButton.jsx';
+import PreviousOrderPage from './pages/order/PreviousOrderPage.jsx';
 
 function App() {
   return (    
@@ -32,6 +33,7 @@ function App() {
           <Route path="/newproductpage" element={<NewProductPage/>}/>
           <Route path="/cart" element={<CartPage/>}/>
           <Route path="/chat" element={<ChatPage/>}/>
+          <Route path="/PreviousOrderPage" element={<PreviousOrderPage/>}/>
         </Routes>
         <CustomerServiceButton/>
       </Router>
