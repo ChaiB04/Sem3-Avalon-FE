@@ -51,10 +51,6 @@ function PreviousOrderPage(){
                                         <p>{product.description}</p>
                                     </div>
                                 </div>
-                                <div className={styles.buttoncontainer}>
-                                    <button onClick={() => removeItemFromCart(product.id)}>X</button>
-                                </div>
-                              
                         </div>
                         <div className={styles.line}></div>
                        </div>

@@ -36,7 +36,6 @@ function CartPage(){
       
       await orderService.getOrderHistory(setUserIdFromToken(), userToken)
               .then(response => {
-                const responseOrders = response.data.allOrders;
                 setOrderHistory(response.data.allOrders.reverse());
                 // console.log(responseOrders.reverse());
               })
@@ -96,7 +95,8 @@ function CartPage(){
         else{
           return null;
 
-    }        }
+    }
+  }
 
 
     const handleRefresh = () => {
@@ -128,7 +128,7 @@ function CartPage(){
 
       async function CreateOrder(){
         //console.log(formData)
-        
+       if(productList.length > 0){
         await orderService.createOrder(formData, userToken)
         .then(()=>{
           localStorage.removeItem('cart');
@@ -146,11 +146,16 @@ function CartPage(){
               className: styles.toastNotification,
               toastId: index.toString()
               })
-            })
-              
-            ;
+            });
           }
         })
+       }
+       else toast.info("Cannot create an order with an empty cart.", {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 5000,
+        draggable: false,
+        className: styles.toastNotification
+       })
       }
 
       const getTotalPriceHistory = (order) => {
@@ -232,7 +237,7 @@ function CartPage(){
                 </>
               ))
             ) : (
-              <p>No Order's available.</p>
+              <p>No Previous order's available.</p>
             )}
         </div>
             <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
