@@ -5,18 +5,18 @@ import styles from './ChatMessages.module.css';
 
 const SendMessagePlaceholder = (props) =>{
     const [message, setMessage] = useState('');
-    const [destinationUsername, setDestinationUsername] = useState('');
+    const [destinationUsername, setDestinationUsername] = useState();
 
-    if(!props.username){
-        return<></>;
-    }
+    // if(!props.username){
+    //     return<></>;
+    // }
 
     const onMessageSend = () => {
         if(!message){
             alert('Please type a message!');
         }
 
-        props.onMessageSend({ 'text': message, 'to': destinationUsername});
+        props.onMessageSend({ 'text': message, "to": destinationUsername});
         setMessage('');
     }
 
