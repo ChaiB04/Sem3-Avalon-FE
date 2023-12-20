@@ -44,7 +44,7 @@ function getChatsCustomerService(userToken){
 
   function getChatOfCustomer(id, userToken){
     return new Promise((resolve, reject) => {
-      axios.get(`${host}/${id}`, {
+      axios.get(`${host}/customer/${id}`, {
         headers: { Authorization: `Bearer ${userToken}` }
       })
       .then(response => {

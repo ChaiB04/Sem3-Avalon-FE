@@ -5,7 +5,7 @@ import SendMessagePlaceHolder from '../components/chatting/SendMessagePlaceholde
 import {useSelector } from 'react-redux/es/hooks/useSelector';
 import tokenService, { userData } from '../services/TokenService';
 import ChatMessagesPlaceholder from '../components/chatting/ChatMessagesPlaceholder';
-import {useLocation } from 'react-router';
+import {useLocation, useNavigate } from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
 import styles from '../components/chatting/ChatMessages.module.css';
 import ChatService from "./../services/ChatService"
@@ -23,6 +23,7 @@ function ChatPage() {
   const [chatId, setChatId] = useState();
   const [chatToId, setChatToId] = useState();
   const [currentId, setCurrentId] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserName();
@@ -57,6 +58,7 @@ function ChatPage() {
     } else {
       //gotta make it so the customer service can choose multiple chats maybe?
       toast.info("cannot message without account!");
+      navigate("/");
     }
   }
 
@@ -105,11 +107,10 @@ function ChatPage() {
         ChatService.postMessage(payload).then((response) => {
           setChatId(response.data.chat_id);
         });
-      } else {
-        // Handle messages without 'to' appropriately
-      }
+      } 
     } else {
       console.warn("Stomp client not ready. Message not sent.");
+      toast.warn("Stomp client not ready. Message not sent.");
     }
   };
   
@@ -129,7 +130,7 @@ function ChatPage() {
  async function setChatIdCustomerService(props){
   setChatId(props.chatId);
   setReadyToChat(props.readyToChat);
-  console.log("props for customer service: " + props.chatId)
+  // console.log("props for customer service: " + props.chatId)
   setupStompClient(props.chatId);
   // setupStompClient(chatToId);
   await ChatService.getChat(props.chatId, userToken).then(response => {
@@ -160,7 +161,7 @@ return (
           <div>
             <div className={styles.messageHolder}>
               <p>I am: Customer Service</p>
-              <p>Chatting to: {username}</p>
+              {/* <p>Chatting to: {username}</p> */}
               <ChatMessagesPlaceholder
                 username={username}
                 Allmessages={Allmessages}
@@ -206,7 +207,6 @@ return (
         </div>
       )}
     </div>
-    <ToastContainer />
   </>
 );
 ;

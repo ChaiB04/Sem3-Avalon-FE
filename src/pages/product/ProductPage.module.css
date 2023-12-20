@@ -32,15 +32,20 @@
     flex-direction: column;
 }
 
+.filterbox p{
+  margin-top: 5px;
+  color:#ECE1E7;
+  font-weight: 600;
+}
 
 .colorDropdown{
-  margin-top:15%;
   display: flex;
   flex-direction: column;
 }
 
 .colorDropdown label {
   color: #ECE1E7;
+  margin-top: 50px;
 }
 
 .colorDropdown select {

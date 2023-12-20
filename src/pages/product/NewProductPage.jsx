@@ -10,7 +10,7 @@ function NewProductPage(){
 
     const [productData, setProductData] = useState({
         name: "",
-        price: 0,
+        price: "",
         description: "",
         color: "",
         picture: [],
@@ -22,9 +22,10 @@ function NewProductPage(){
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+        const sanitizedValue = name === 'price' && value === '' ? 0 : value;
         setProductData({
           ...productData,
-          [name]: value,
+          [name]: sanitizedValue,
         });
       };
     
@@ -62,7 +63,6 @@ function NewProductPage(){
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        // Send a POST request to your backend API
         await ProductService.createProduct(productData,userToken)
           .then(() => navigate("/productpage"))
           .catch((error) => {
@@ -76,9 +76,7 @@ function NewProductPage(){
                 className: styles.toastNotification,
                 toastId: index.toString()
                 })
-              })
-                
-              ;
+              });
             }
             else if(error.response.data.status === 401){
               errors.forEach((error, index) => {
@@ -126,6 +124,7 @@ function NewProductPage(){
                        <div className={styles.colorDropdown}>
                           <label htmlFor="colorDropdown" >color:</label>
                           <select type="text" id="colorDropdown" name="color" placeholder="Color" value={productData.color} onChange={handleInputChange} required>
+                            <option value="">Select Color</option>
                             <option value="pink">Pink</option>
                             <option value="blue">Blue</option>
                             <option value="orange">Orange</option>
@@ -142,7 +141,6 @@ function NewProductPage(){
                 </div>
                 <button type="submit" className={` ${styles.buttonCreate}`} >Create</button>
             </form>
-            <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
         </>
     )
 

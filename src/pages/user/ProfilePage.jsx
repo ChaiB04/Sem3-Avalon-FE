@@ -108,8 +108,7 @@ function ProfilePage() {
         </div>
        
       </div>
-      <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
-    </>
+     </>
   );
 }
 

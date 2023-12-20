@@ -91,6 +91,7 @@ function ProductPage() {
         <form onSubmit={fetchProducts}>
           <div className={styles.filterbox}>
                     <div className={styles.range__slider}>
+                      <p>Filter</p>
                          <label htmlFor="price">Maximum Price:</label>
                          <input type="range" id="price" name="price" min="0" max="100" value={Price} onChange={handlePriceChange} />
                          <div className="price-labels">
@@ -127,8 +128,7 @@ function ProductPage() {
           </div>
         </div>
       </div>
-      <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
-    </div>
+       </div>
   );
 }
 

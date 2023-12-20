@@ -11,16 +11,25 @@
     align-items: center;
 }
 
+.form label{
+    color:#5D3F58;
+    font-weight: 800;
+    font-size: xx-large;
+    margin-bottom: 5%;
+}
 
 .colorDropdown{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-bottom: 4vh;
   }
   
   .colorDropdown label {
     color: #5D3F58;
-  }
+    font-weight: 400;
+    font-size: large;
+    margin-right: 10%;
+}
   
   .colorDropdown select {
     color: #ECE1E7;
@@ -40,6 +49,7 @@
     flex-flow: row;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .textBoxesColumn{
@@ -47,7 +57,7 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 90%;
 }
 
 .pictureContainerStyle{
@@ -97,5 +107,6 @@
     border-radius: 25px;
     border-style: none;
     width: 50%;
-
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
