@@ -50,11 +50,21 @@ function editAccount(id, data, userToken) {
   });
 }
 
+function loginWithOAuth2(){
+  return axios.get(`${hostname}/oauth2login`);
+}
+
+function getGoogleAuthCode(){
+  return axios.get(`${hostname}/oauth2/code/google`)
+}
+
 const UserService = {
   createUser,
   getUserById,
   loginWithEmailAndPassword,
-  editAccount
+  editAccount,
+  loginWithOAuth2,
+  getGoogleAuthCode
 };
 
 export default UserService;
