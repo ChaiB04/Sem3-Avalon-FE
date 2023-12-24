@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
+import OAuthService from "../../services/OAuthService";
 function LoginPage() {
   const [formData, setFormData] = useState({
     email: "",
@@ -58,7 +59,7 @@ function LoginPage() {
   }
 
   const loginOAuth2 = async () =>{
-    await userService.loginWithOAuth2()
+    await OAuthService.loginWithOAuth2()
     .then(response => {
       const link =response.data.link;
       console.log("response: ", response)

@@ -8,6 +8,7 @@ import EditProfileInfo from "../../components/EditProfileInfo";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import TokenService from "../../services/TokenService";
 import { userData } from "../../services/TokenService";
+import OAuthService from "../../services/OAuthService";
 
 function ProfilePage() {
 
@@ -73,6 +74,26 @@ function ProfilePage() {
     }
 
 
+    const loginOAuth2 = async () =>{
+      await OAuthService.linkWithOAuth2(userToken)
+      .then(response => {
+        const link =response.data.link;
+        console.log("response: ", response)
+        console.log("Redirect link:", link);
+        window.location.href = link;
+  
+      })
+      // .then(
+      //   getGoogleCode
+      // )
+      .catch(error => {
+        console.error("Error during OAuth2 login:", error);
+      });
+  
+    }
+  
+
+
   return (
     <>
       <div className={styles.containerfluid}>
@@ -101,13 +122,15 @@ function ProfilePage() {
           )}          
           </div>
        
-  
+          <button onClick={loginOAuth2} style={{ display: 'inline-block', padding: '10px 20px', backgroundColor: '#4285F4', color: '#ffffff', textDecoration: 'none', borderRadius: '5px' }}>Link Gmail</button>
+
         </div>
         <div className={styles.user_details}>
 
         </div>
        
       </div>
+      
      </>
   );
 }

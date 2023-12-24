@@ -17,6 +17,9 @@ import ChatPage from './pages/ChatPage.jsx'
 import CustomerServiceButton from './components/chatting/CustomerServiceButton.jsx';
 import PreviousOrderPage from './pages/order/PreviousOrderPage.jsx';
 import { ToastContainer } from 'react-toastify';
+import LoadingPage from './pages/LoadingLinkingPage.jsx';
+import LoadingLoggingIn from './pages/LoadingLoggingIn.jsx';
+
 function App() {
   return (    
     <>
@@ -34,6 +37,8 @@ function App() {
           <Route path="/cart" element={<CartPage/>}/>
           <Route path="/chat" element={<ChatPage/>}/>
           <Route path="/PreviousOrderPage" element={<PreviousOrderPage/>}/>
+          <Route path="/loadingLinking" element={<LoadingPage/>}/>
+          <Route path="/loadingLoggingIn" element={<LoadingLoggingIn/>}/>
         </Routes>
         <CustomerServiceButton/>
         <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
