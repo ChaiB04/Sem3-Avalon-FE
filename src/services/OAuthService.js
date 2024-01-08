@@ -3,9 +3,7 @@ import axios from "axios";
 const hostname = 'http://localhost:8080';
 
 function postGoogleCodeReceiveAccessToken(data, userToken){
-    return axios.post(`${hostname}/oauth2`,data, {
-        headers: { Authorization: `Bearer ${userToken}` }
-      })
+    return axios.post(`${hostname}/oauth2`,data)
 }
 
 function loginWithOAuth2(){
@@ -24,12 +22,17 @@ function loginWithOAuth2(){
       })
 }
 
+function postLoginWithOAuth(data){
+  return axios.post(`${hostname}/oauth2/loginGoogle`, data);
+}
+
 
 const OAuthService = {
     postGoogleCodeReceiveAccessToken,
     loginWithOAuth2,
     linkWithOAuth2,
-    postLinkAccounts
+    postLinkAccounts,
+    postLoginWithOAuth
 }
 
 export default OAuthService;

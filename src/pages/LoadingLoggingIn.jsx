@@ -2,46 +2,82 @@ import React, { useEffect, useState } from "react";
 import OAuthService from "../services/OAuthService";
 import ReactLoading from "react-loading";
 import TokenService, { userData } from "../services/TokenService";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { setUserToken } from "../redux/features/userSlice";
+
 
 function LoadingLoggingIn(){
-    const userToken = useSelector((state) => state.token);
+    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     // const [googleAccessToken, setGoogleAccessToken] = useState();
 
-    async function linkAccount(){
+    async function loginOAuth(){
     const url = window.location.href;
     const params = new URLSearchParams(new URL(url).search);
     const code = params.get("code");
-    let googleAccessToken;
+    let googleAccessToken = "";
+    const login = true;
+
 
     // console.log("google code:", code);
     const data = {
-        code: code
+        code: code,
+        login: login
     }
 
-    await OAuthService.postGoogleCodeReceiveAccessToken(data, userToken)
+    await OAuthService.postGoogleCodeReceiveAccessToken(data)
     .then(response => {
         googleAccessToken = response.data;
-    })
-    console.log(googleAccessToken)
-    TokenService.setAccessToken(userToken);
-    
-    const linkData = {
-        user_id: userData.claims.userId,
-        accessToken: googleAccessToken
+    }).catch(error => {
+        const errors = error.response.data.properties.errors
+        if (error.response.data.status === 400) {
+          errors.forEach((error, index) => {
+            toast.error(error.error, {
+              position: toast.POSITION.BOTTOM_CENTER,
+              autoClose: 5000,
+              draggable: false,
+              className: styles.toastNotification,
+              toastId: index.toString()
+            })
+          });
+        }
+      })
+
+    const logindata ={
+        code: googleAccessToken,
+        login: login
     }
 
-    await OAuthService.postLinkAccounts(linkData, userToken)
+    await OAuthService.postLoginWithOAuth(logindata)
     .then(response => {
-        console.log(response.data)
-    })
-
+        const accesstoken = response.data.accessToken
+        // setToken(accesstoken);
+        dispatch(setUserToken(accesstoken));
+        console.log("This is the accesstoken: " + response.data.accessToken);
+        navigate("/");
+    }
+    ).catch(error => {
+        const errors = error.response.data.properties.errors
+        if (error.response.data.status === 400) {
+          errors.forEach((error, index) => {
+            toast.error(error.error, {
+              position: toast.POSITION.BOTTOM_CENTER,
+              autoClose: 5000,
+              draggable: false,
+              className: styles.toastNotification,
+              toastId: index.toString()
+            })
+          });
+        }
+      })
     }
 
 
 
     useEffect(() => {
-        linkAccount();
+        loginOAuth();
     })
 
 

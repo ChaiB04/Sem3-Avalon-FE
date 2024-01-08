@@ -106,7 +106,20 @@ function ChatPage() {
         });
         ChatService.postMessage(payload).then((response) => {
           setChatId(response.data.chat_id);
-        });
+        }).catch(error => {
+          const errors = error.response.data.properties.errors
+          if (error.response.data.status === 400) {
+            errors.forEach((error, index) => {
+              toast.error(error.error, {
+                position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: 5000,
+                draggable: false,
+                className: styles.toastNotification,
+                toastId: index.toString()
+              })
+            });
+          }
+        })
       } 
     } else {
       console.warn("Stomp client not ready. Message not sent.");
@@ -136,6 +149,19 @@ function ChatPage() {
   await ChatService.getChat(props.chatId, userToken).then(response => {
     setAllmessages(response.data.chat.chatMessages)
     // console.log(response)
+  }).catch(error => {
+    const errors = error.response.data.properties.errors
+    if (error.response.data.status === 400) {
+      errors.forEach((error, index) => {
+        toast.error(error.error, {
+          position: toast.POSITION.BOTTOM_CENTER,
+          autoClose: 5000,
+          draggable: false,
+          className: styles.toastNotification,
+          toastId: index.toString()
+        })
+      });
+    }
   })
 }
 

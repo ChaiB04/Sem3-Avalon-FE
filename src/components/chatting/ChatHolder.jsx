@@ -22,6 +22,19 @@ function ChatHolder({ chat, onSetChatIdCustomerService }) {
     .then(response => {
       // console.log("User1   " + response)
       setUser1(response)
+    }).catch(error => {
+      const errors = error.response.data.properties.errors
+      if (error.response.data.status === 400) {
+        errors.forEach((error, index) => {
+          toast.error(error.error, {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 5000,
+            draggable: false,
+            className: styles.toastNotification,
+            toastId: index.toString()
+          })
+        });
+      }
     })
   
 
@@ -29,6 +42,19 @@ function ChatHolder({ chat, onSetChatIdCustomerService }) {
     .then(response => {
       // console.log("User2   " + response)
       setUser2(response)
+    }).catch(error => {
+      const errors = error.response.data.properties.errors
+      if (error.response.data.status === 400) {
+        errors.forEach((error, index) => {
+          toast.error(error.error, {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 5000,
+            draggable: false,
+            className: styles.toastNotification,
+            toastId: index.toString()
+          })
+        });
+      }
     })
 
     // console.log(user1 + " and " + user2)

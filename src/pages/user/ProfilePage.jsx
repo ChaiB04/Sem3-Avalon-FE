@@ -83,12 +83,20 @@ function ProfilePage() {
         window.location.href = link;
   
       })
-      // .then(
-      //   getGoogleCode
-      // )
       .catch(error => {
-        console.error("Error during OAuth2 login:", error);
-      });
+        const errors = error.response.data.properties.errors
+        if (error.response.data.status === 400) {
+          errors.forEach((error, index) => {
+            toast.error(error.error, {
+              position: toast.POSITION.BOTTOM_CENTER,
+              autoClose: 5000,
+              draggable: false,
+              className: styles.toastNotification,
+              toastId: index.toString()
+            })
+          });
+        }
+      })
   
     }
   

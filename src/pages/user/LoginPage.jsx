@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
 import OAuthService from "../../services/OAuthService";
+
 function LoginPage() {
   const [formData, setFormData] = useState({
     email: "",
@@ -71,20 +72,21 @@ function LoginPage() {
     //   getGoogleCode
     // )
     .catch(error => {
-      console.error("Error during OAuth2 login:", error);
-    });
-
-  }
-
-
-  const getGoogleCode = async () =>{
-    await userService.getGoogleAuthCode()
-    .then(response => {
-      console.log("link google code:", response);
-      window.location.href=response.data
+      const errors = error.response.data.properties.errors
+      if (error.response.data.status === 400) {
+        errors.forEach((error, index) => {
+          toast.error(error.error, {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 5000,
+            draggable: false,
+            className: styles.toastNotification,
+            toastId: index.toString()
+          })
+        });
+      }
     })
-  }
 
+  }
 
 
   return (
@@ -99,7 +101,7 @@ function LoginPage() {
           <button type="submit" className={` ${styles.buttonLogin}`}>Login</button>
         </form>
 
-        <button onClick={loginOAuth2} style={{ display: 'inline-block', padding: '10px 20px', backgroundColor: '#4285F4', color: '#ffffff', textDecoration: 'none', borderRadius: '5px' }}>Login with Gmail</button>
+        <button onClick={loginOAuth2} className={`${styles.buttonLogin} mt-5`} style={{}}>Login with Gmail</button>
 
       </div>
     </>
