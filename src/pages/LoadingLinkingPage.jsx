@@ -80,7 +80,7 @@ function LoadingLinkingPage(){
 
     return (
         <>
-         <ReactLoading type="spin" color="#0000FF"
+         <ReactLoading type="spin" color="#5D3F58"
                 height={100} width={50} />
         </>        
     )

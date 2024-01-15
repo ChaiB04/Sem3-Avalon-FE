@@ -1,6 +1,7 @@
 import axios from "axios";
+import hostname from "./BELink"
 
-const host = "http://localhost:8080/notifications";
+const host = `${hostname.hostname()}/notifications`;
 
 function getChatsCustomerService(userToken){
     return new Promise((resolve, reject) => {

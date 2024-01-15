@@ -12,6 +12,10 @@
 
 }
 
+.email{
+    height: 20px;
+}
+
 .errorMessage {
     display: none;
     color: darkred;

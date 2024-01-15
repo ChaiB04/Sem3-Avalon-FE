@@ -1,5 +1,7 @@
 import axios from "axios";
-const hostname = 'http://localhost:8080';
+import host from "./BELink"
+
+const hostname = host.hostname();
 
 function createOrder(data, userToken) {
     return new Promise((resolve, reject) => {

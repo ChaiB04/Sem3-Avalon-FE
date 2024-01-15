@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import styles from '../components/chatting/ChatMessages.module.css';
 import ChatService from "./../services/ChatService"
 import ChatHolder from '../components/chatting/ChatHolder';
+import host from "../services/BELink"
 
 function ChatPage() {
   const [stompClient, setStompClient] = useState();
@@ -56,15 +57,19 @@ function ChatPage() {
         // setChattingTo("Customer Service")
       }
     } else {
-      //gotta make it so the customer service can choose multiple chats maybe?
-      toast.info("cannot message without account!");
+      toast.info("cannot message without account!", {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 5000,
+        draggable: false,
+        className: styles.toastNotification
+      });
       navigate("/");
     }
   }
 
 
   const setupStompClient = (id) => {
-    const host = 'ws://localhost:8080/ws';
+    const host = `ws://localhost:8090/ws`;
     const stompClient = new Client({
       brokerURL: host,
       reconnectDelay: 5000,
@@ -96,7 +101,7 @@ function ChatPage() {
       };
 
   
-      setAllmessages((messagesSent) => [...messagesSent, payload]);
+      // setAllmessages((messagesSent) => [...messagesSent, payload]);
   
       if (payload.chat_id) {
         console.log(payload.chat_id);

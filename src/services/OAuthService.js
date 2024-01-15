@@ -1,6 +1,7 @@
 import axios from "axios";
+import host from "./BELink"
 
-const hostname = 'http://localhost:8080';
+const hostname = host.hostname();
 
 function postGoogleCodeReceiveAccessToken(data, userToken){
     return axios.post(`${hostname}/oauth2`,data)

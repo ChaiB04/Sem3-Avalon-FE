@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
 import OAuthService from "../../services/OAuthService";
+import gmailogo from "../../images/emailogo.png"
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -68,9 +69,6 @@ function LoginPage() {
       window.location.href = link;
 
     })
-    // .then(
-    //   getGoogleCode
-    // )
     .catch(error => {
       const errors = error.response.data.properties.errors
       if (error.response.data.status === 400) {
@@ -101,7 +99,7 @@ function LoginPage() {
           <button type="submit" className={` ${styles.buttonLogin}`}>Login</button>
         </form>
 
-        <button onClick={loginOAuth2} className={`${styles.buttonLogin} mt-5`} style={{}}>Login with Gmail</button>
+        <button onClick={loginOAuth2} className={`${styles.buttonLogin} mt-5`} style={{}}>Login with Gmail <img className={styles.email}src={gmailogo}></img></button>
 
       </div>
     </>

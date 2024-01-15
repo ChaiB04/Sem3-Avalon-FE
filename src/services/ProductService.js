@@ -1,6 +1,7 @@
 import axios from "axios";
+import host from "./BELink"
 
-const hostname = 'http://localhost:8080';
+const hostname = host.hostname();
 
 function getAllProducts(data){
     return new Promise((resolve, reject) => {
