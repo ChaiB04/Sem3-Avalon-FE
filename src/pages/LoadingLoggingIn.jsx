@@ -7,13 +7,13 @@ import { useNavigate } from "react-router";
 import { setUserToken } from "../redux/features/userSlice";
 
 
-function LoadingLoggingIn(){
-    
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    // const [googleAccessToken, setGoogleAccessToken] = useState();
+function LoadingLoggingIn() {
 
-    async function loginOAuth(){
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const [googleAccessToken, setGoogleAccessToken] = useState();
+
+  async function loginOAuth() {
     const url = window.location.href;
     const params = new URLSearchParams(new URL(url).search);
     const code = params.get("code");
@@ -23,14 +23,14 @@ function LoadingLoggingIn(){
 
     // console.log("google code:", code);
     const data = {
-        code: code,
-        login: login
+      code: code,
+      login: login
     }
 
     await OAuthService.postGoogleCodeReceiveAccessToken(data)
-    .then(response => {
+      .then(response => {
         googleAccessToken = response.data;
-    }).catch(error => {
+      }).catch(error => {
         const errors = error.response.data.properties.errors
         if (error.response.data.status === 400) {
           errors.forEach((error, index) => {
@@ -45,20 +45,20 @@ function LoadingLoggingIn(){
         }
       })
 
-    const logindata ={
-        code: googleAccessToken,
-        login: login
+    const logindata = {
+      code: googleAccessToken,
+      login: login
     }
 
     await OAuthService.postLoginWithOAuth(logindata)
-    .then(response => {
+      .then(response => {
         const accesstoken = response.data.accessToken
         // setToken(accesstoken);
         dispatch(setUserToken(accesstoken));
         console.log("This is the accesstoken: " + response.data.accessToken);
         navigate("/");
-    }
-    ).catch(error => {
+      }
+      ).catch(error => {
         const errors = error.response.data.properties.errors
         if (error.response.data.status === 400) {
           errors.forEach((error, index) => {
@@ -72,21 +72,25 @@ function LoadingLoggingIn(){
           });
         }
       })
-    }
+  }
 
 
 
-    useEffect(() => {
-        loginOAuth();
-    })
+  useEffect(() => {
+    loginOAuth();
+  })
 
 
-    return (
-        <>
-         <ReactLoading type="spin" color="#5D3F58"
-                height={100} width={50} />
-        </>        
-    )
+  return (
+    <>
+    <div className="column d-flex flex-column align-items-center">
+      <h3 style={{ color: "#5D3F58" }}>Logging in with Gmail...</h3>
+      <div className="mx-auto">
+        <ReactLoading type="spin" color="#5D3F58" height={100} width={50} />
+      </div>
+    </div>
+  </>
+  )
 }
 
 export default LoadingLoggingIn;

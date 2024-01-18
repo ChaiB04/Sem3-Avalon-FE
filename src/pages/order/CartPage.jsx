@@ -5,6 +5,7 @@ import styles from './CartPage.module.css'
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import tokenService, { userData } from '../../services/TokenService';
+import buttonstyle from "../../components/ButtonShop.module.css"
 
 function CartPage(){
     const [productList, setProductList] = useState([])
@@ -211,13 +212,15 @@ function CartPage(){
 
                     </div>
                     <div className={styles.line}></div>
-                   <div className={styles.bundledCheckbox}>
-                   <input
-                    type="checkbox"
-                    checked={formData.bundle_or_not}
-                    onChange={handleCheckboxChange}
-                    /> <p>Do you want it to be bundled?</p>
-                   </div>
+                   <label className=" d-flex align-items-center justify-content-center">
+                    <input
+                         type="checkbox"
+                         checked={formData.bundle_or_not}
+                         onChange={handleCheckboxChange}
+                        className={`${styles.customcheckbox}`}
+          
+                    /> <p className="mt-3 ms-2">Do you want it to be bundled?</p>
+                </label>
                     <p className={styles.totalprice}> Total: ${getTotalPrice()}</p>
                     <button className={styles.paynowbutton} onClick={CreateOrder}>Pay now</button>
             </div>

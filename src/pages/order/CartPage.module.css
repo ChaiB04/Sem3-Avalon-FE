@@ -122,3 +122,10 @@
     align-self: center;
     margin-left: 5px;
 }
+
+.customcheckbox {
+    width: 20px; 
+    height: 20px; 
+    background-color: #ECE1E7; 
+    border: 5px solid #5D3F58; 
+}

@@ -16,7 +16,7 @@ import CartPage from './pages/order/CartPage.jsx';
 import ChatPage from './pages/ChatPage.jsx'
 import CustomerServiceButton from './components/chatting/CustomerServiceButton.jsx';
 import PreviousOrderPage from './pages/order/PreviousOrderPage.jsx';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer,toast } from 'react-toastify';
 import LoadingPage from './pages/LoadingLinkingPage.jsx';
 import LoadingLoggingIn from './pages/LoadingLoggingIn.jsx';
 
@@ -41,7 +41,7 @@ function App() {
           <Route path="/loadingLoggingIn" element={<LoadingLoggingIn/>}/>
         </Routes>
         <CustomerServiceButton/>
-        <ToastContainer toastStyle={{ backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
+        <ToastContainer toastStyle={{ position: toast.POSITION.BOTTOM_CENTER, backgroundColor: "#2b1327", color: "#ECE1E7",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)"  }} />
       </Router>
     </>
   )

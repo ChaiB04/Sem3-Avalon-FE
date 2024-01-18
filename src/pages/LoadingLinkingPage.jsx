@@ -79,10 +79,14 @@ function LoadingLinkingPage(){
 
 
     return (
-        <>
-         <ReactLoading type="spin" color="#5D3F58"
-                height={100} width={50} />
-        </>        
+      <>
+      <div className="column d-flex flex-column align-items-center">
+        <h3 style={{ color: "#5D3F58" }}>Linking account to Gmail...</h3>
+        <div className="mx-auto">
+          <ReactLoading type="spin" color="#5D3F58" height={100} width={50} />
+        </div>
+      </div>
+    </>     
     )
 }
 

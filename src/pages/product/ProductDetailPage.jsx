@@ -6,6 +6,8 @@ import productService from '../../services/ProductService.js';
 import tokenService, { userData } from '../../services/TokenService'
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import buttonstyle from "../../pages/ButtonStyle.module.css";
+
 
 function ProductDetailPage() {
     const { id } = useParams();
@@ -15,17 +17,17 @@ function ProductDetailPage() {
     const [isAdmin, setIsAdmin] = useState(false);
     const userToken = useSelector((state) => state.token);
 
-    function CheckRole(){
-      tokenService.setAccessToken(userToken);
-      if(userData.claims.roles === "ADMINISTRATOR"){
-        setIsAdmin(true);
-      }
+    function CheckRole() {
+        tokenService.setAccessToken(userToken);
+        if (userData.claims.roles === "ADMINISTRATOR") {
+            setIsAdmin(true);
+        }
     }
 
     const navigate = useNavigate();
 
-    function addToCart(){
-        if(userToken != null){
+    function addToCart() {
+        if (userToken != null) {
             const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
             const updatedCart = [...existingCart, product];
             localStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -36,7 +38,7 @@ function ProductDetailPage() {
                 className: styles.toastNotification
             })
         }
-        else{
+        else {
             toast.info("Please log in to buy the product!", {
                 position: toast.POSITION.BOTTOM_CENTER,
                 autoClose: 5000,
@@ -71,67 +73,69 @@ function ProductDetailPage() {
         }
     }
 
-    async function deleteProduct(){
+    async function deleteProduct() {
         await productService.deleteProduct(product.id, userToken)
-        .then(navigate("/productpage"))
-        .catch(error => {
-            const errors = error.response.data.properties.errors
-            if (error.response.data.status === 400) {
-              errors.forEach((error, index) => {
-                toast.error(error.error, {
-                  position: toast.POSITION.BOTTOM_CENTER,
-                autoClose: 5000,
-                draggable: false,
-                className: styles.toastNotification,
-                toastId: index.toString()
-                })
-              })
-                
-              ;
-            }
-          })
-}
+            .then(navigate("/productpage"))
+            .catch(error => {
+                const errors = error.response.data.properties.errors
+                if (error.response.data.status === 400) {
+                    errors.forEach((error, index) => {
+                        toast.error(error.error, {
+                            position: toast.POSITION.BOTTOM_CENTER,
+                            autoClose: 5000,
+                            draggable: false,
+                            className: styles.toastNotification,
+                            toastId: index.toString()
+                        })
+                    })
+
+                        ;
+                }
+            })
+    }
 
     return (
-       <>
-        <div className={styles.container}>
-            <div className="wrapper">
-                {product ? (
-                    <>
-                        <div className={styles.productImage}>
-                            {picture !== undefined ? (
-                                <img src={picture} alt="ProductPicture" />
-                            ) : (
-                                <p></p>
-                            )}
-                        </div>
-                        <div className={styles.productInfo}>
-                            <div className={styles.productText}>
-                                <h1>{product.name}</h1>
-                                <p>{product.description}</p>
-                            </div>
-                            <div className={styles.productpricebtn}>
-                                <p>{product.price}$</p>
-                                <br />
-                                <button type="button" onClick={() => addToCart()}>buy now</button>
-                                {isAdmin ? (
-                                    <button onClick={deleteProduct}>Delete</button>
-                                ): (
-                                    <>
-                                    </>
+        <>
+            <div className={styles.container}>
+                <div className="wrapper">
+                    {product ? (
+                        <>
+                            <div className={styles.productImage}>
+                                {picture !== undefined ? (
+                                    <img src={picture} alt="ProductPicture" />
+                                ) : (
+                                    <p></p>
                                 )}
                             </div>
-                        </div>
-                        
-                    </>
-                ) : (
-                    <p>Not getting the product, sorry! 😢</p>
-                )}
+                            <div className={styles.productInfo}>
+                                <div className={styles.productText}>
+                                    <h1>{product.name}</h1>
+                                    <p>{product.description}</p>
+                                </div>
+                                <div className={styles.productpricebtn}>
+                                    <p>{product.price}$</p>
+                                    <br />
+                                    {isAdmin ? (
+                                        <>
+                                            <button className={buttonstyle.button} onClick={deleteProduct}>Delete</button>
+                                            <button className={buttonstyle.button} onClick={deleteProduct}>Edit</button></>
+                                    ) : (
+                                        <>
+                                            <button className={buttonstyle.button} type="button" onClick={() => addToCart()}>buy now</button>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+
+                        </>
+                    ) : (
+                        <p>Not getting the product, sorry! 😢</p>
+                    )}
+                </div>
+
             </div>
-           
-        </div>
-          </>
-        );
+        </>
+    );
 }
 
 export default ProductDetailPage;

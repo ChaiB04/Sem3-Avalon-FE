@@ -10,27 +10,18 @@
     align-items: center; 
     /* height: 80%; */
 }
-
-.button{
+.button {
+    background-color: #5D3F58;
+    border-radius: 25px;
+    width: 200px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 1);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
-    width: 176px;
-    margin: 0;
-    box-sizing: border-box;
-    border: transparent;
-    border-radius: 15px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
     color: #ECE1E7;
-    background-color: #5D3F58;
-    cursor: pointer;
-    outline: none;
+    font-family: 'Raleway', sans-serif;
 }
+
 
 .divsOnRow{
     display:flex;

@@ -60,7 +60,7 @@ body {
   
   .productText h1,
   .productpricebtn p {
-    font-family: 'Bentham', serif;
+    font-family: 'Raleway', sans-serif;
   }
   
   .productText h2 {
@@ -76,7 +76,7 @@ body {
   .productText p {
     height: 125px;
     margin: 0;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Raleway', sans-serif;
     color: #5D3F58;
     line-height: 1.7em;
     font-size: 15px;
@@ -96,7 +96,7 @@ body {
     position: absolute;
     top: -20px;
     height: 50px;
-    font-family: 'Trocchi', serif;
+    font-family: 'Raleway', sans-serif;
     padding-bottom: 20%;
     align-items: center;
     font-size: 28px;
@@ -107,7 +107,7 @@ body {
   span {
     display: inline-block;
     height: 50px;
-    font-family: 'Suranna', serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 34px;
   }
   

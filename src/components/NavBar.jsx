@@ -43,7 +43,7 @@ function NavBar() {
         {
             id: 2,
             path: "/",
-            text: "Homepage"
+            text: "Home Page"
         },
         {
             id: 4,
@@ -61,7 +61,7 @@ function NavBar() {
         {
             id: 2,
             path: "/",
-            text: "Homepage"
+            text: "Home Page"
         },
         {
             id: 3,

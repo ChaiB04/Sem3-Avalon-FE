@@ -43,7 +43,20 @@ function loginWithEmailAndPassword(data) {
 //add usertoken to set
 function editAccount(id, data, userToken) {
   return new Promise((resolve, reject) => {
-    axios.put(`${hostname}/users/${id}`, data)
+    axios.put(`${hostname}/users/${id}`, data, {
+      headers: { Authorization: `Bearer ${userToken}` }
+    })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+
+function deleteAccount(id, userToken) {
+  return new Promise((resolve, reject) => {
+    axios.delete(`${hostname}/users/${id}`, {
+      headers: { Authorization: `Bearer ${userToken}` }
+    })
       .catch(error => {
         reject(error);
       });
@@ -60,7 +73,8 @@ const UserService = {
   createUser,
   getUserById,
   loginWithEmailAndPassword,
-  editAccount
+  editAccount,
+  deleteAccount
 };
 
 export default UserService;
