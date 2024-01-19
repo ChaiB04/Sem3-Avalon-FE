@@ -69,7 +69,7 @@ function ChatPage() {
 
 
   const setupStompClient = (id) => {
-    const host = `ws://localhost:8080/ws`;
+    const host = `ws://localhost:8090/ws`;
     const stompClient = new Client({
       brokerURL: host,
       reconnectDelay: 5000,

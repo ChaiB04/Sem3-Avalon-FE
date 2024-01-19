@@ -87,7 +87,7 @@ return (
                </div> */}
 
                <div className={styles.popular_items_container}>
-                    <p className={styles.popular_title}>Popular</p>
+                    <p className={styles.popular_title}>Products</p>
                     <div className={styles.popular_line}></div> 
                          <div className = {styles.cardsHolder} >
                          {productList.length > 0 ? (
